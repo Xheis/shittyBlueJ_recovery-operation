@@ -37,7 +37,7 @@ public class MovieDatabase
     
     public void debugPrint(String debugString)
     {
-        System.out.println(debugString);
+        System.out.println("|DEBUG~$: " + debugString);
     }
 
     
@@ -45,12 +45,12 @@ public class MovieDatabase
     private void chrisCopy2implimentation(Movie array1[], Movie array2[], Movie newMovie)
     {
       //Movie[] returnArray = new Movie[array1.length+1];
-      for(int i=0; i< array1.length; i++)
+      for(int i=0; i< array1.length-1; i++)
       {
         array2[i] = array1[i];
-        debugPrint = array1[i].getName();
+        debugPrint(Integer.toString(i) + " " + array1[i].getName());
       }
-      array2[array1.length] = new Movie(); 
+      array2[array1.length] = newMovie;//new Movie(); 
       //return(returnArray);
     }
 
