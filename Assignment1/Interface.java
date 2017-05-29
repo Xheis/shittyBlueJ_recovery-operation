@@ -238,7 +238,13 @@ public class Interface {
     //a method show help text
     private void listMovies()
     {
-        
+    	System.out.println("|>> Movies in Database:");
+        System.out.println("|");
+        for (int i = 0; i < database.getLogicalSize(); i++) 
+        {
+        	System.out.println("|> " + database.getMovie(i).getName());
+        }
+        System.out.print("|> ");
     }
     
     //a method show help text

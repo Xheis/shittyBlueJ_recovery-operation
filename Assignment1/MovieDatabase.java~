@@ -44,7 +44,7 @@ public class MovieDatabase
       {
         returnArray[i] = array1[i];
       }
-      returnArray[] 
+      returnArray[array1.length] = new Movie(); 
       return(returnArray);
     }
 
@@ -58,45 +58,7 @@ public class MovieDatabase
       //adds to array
       movieArray = chrisCopy2implimentation(movieArray,newMovie);
       logicalSize++;
-       //catch non-ints
        
-
-       /*switch  (movieNumber)
-       {
-          case 0:
-                movie1 = newMovie;
-                System.out.println("|> Name: " + movie1.getName());
-                System.out.println("|> ");
-                break;
-          case 1:
-                movie2 = newMovie;
-                System.out.println("|> Name: " + movie1.getName());
-                System.out.println("|> Name: " + movie2.getName());
-                System.out.println("|> ");
-
-                break;
-          case 2:
-                movie3 = newMovie;
-                System.out.println("|> Name: " + movie1.getName());
-                System.out.println("|> Name: " + movie2.getName());
-                System.out.println("|> Name: " + movie3.getName());
-                System.out.println("|> ");
-
-                break;
-          case 3:
-                movie4 = newMovie;
-                System.out.println("|> Name: " + movie1.getName());
-                System.out.println("|> Name: " + movie2.getName());
-                System.out.println("|> Name: " + movie3.getName());
-                System.out.println("|> Name: " + movie4.getName());
-                System.out.println("|> ");
-
-                break;
-          default:
-                //error
-                //msgbox error!
-                break;
-       } */
     }   
     
    public Movie getMovie(int movieNumber)
