@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Interface
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=void\ run()
+comment3.params=
+comment3.target=void\ initInterface()
+comment4.params=
+comment4.target=void\ launchTIO()
+comment5.params=
+comment5.target=void\ printCommandsString()
+comment6.params=
+comment6.target=void\ processUserInput()
+comment7.params=miliSeconds
+comment7.target=void\ customWait(int)
+numComments=8
