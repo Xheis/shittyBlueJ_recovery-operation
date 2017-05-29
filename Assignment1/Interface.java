@@ -282,10 +282,7 @@ public class Interface {
     //a method show help text
     private void listMoviesInSpecificPlaylist()
     {
-        int intAnswer = 0;
-        //get all playlists as number
-
-        //chose number
+        int intAnswer = showNumberedPlaylists();
         System.out.println("|>> Movies in \"" + playlistArray[intAnswer].getPlaylistName() +  "\":");
         System.out.println("|> " + playlistArray[intAnswer].getMoviesAsString());
     }
@@ -338,10 +335,10 @@ public class Interface {
         
     }
     
-     //a method show help text
-    private void editPlaylist()
-    {
-    	System.out.println("|>> Showing all Playlists");
+	private int showNumberedPlaylists()
+	{
+		int intAnswer = -1;
+		System.out.println("|>> Showing all Playlists");
         System.out.println("|");
         //loop all playlists, show them numbered;
     	for (int i = 0; i < logicalSize; i++) 
@@ -354,9 +351,19 @@ public class Interface {
     		{
     			System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());	
     		}
-    		
     	}
         //ask user to add by number
+        System.out.println("| ");
+        System.out.println("|> Please choose a playlist");
+        System.out.print("|> ");
+        intAnswer = console.nextInt();
+        return(intAnswer);
+	}
+
+     //a method show help text
+    private void editPlaylist()
+    {
+    	
 
         //ask user if they'd like to stop
 
