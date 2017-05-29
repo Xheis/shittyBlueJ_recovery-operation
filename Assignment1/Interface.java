@@ -35,7 +35,7 @@ public class Interface {
     //and movie database
     private void run() 
     {
-        initInterface();    //initialise all our variables we'll need to start
+        //initInterface();    //initialise all our variables we'll need to start
         launchTIO();    //launch our TIO-driven command loop
     }
 
@@ -43,7 +43,7 @@ public class Interface {
     //private void initInterface()
     public Interface()
     {
-       playlistArray = new Playlist[playlistArray];
+       playlistArray = new Playlist[logicalSize];
        database = new MovieDatabase();
     }
 
@@ -271,13 +271,23 @@ public class Interface {
     //a method show help text
     private void listPlaylists()
     {
-        
+    	System.out.println("|>> Playlists in System:"
+        for (int i = 0; i < logicalSize; i++)
+        {
+        	System.out.println("|> " + playlistArray[i].getName());
+        }
+        System.out.print("|> ");
     }
     
     //a method show help text
     private void listMoviesInSpecificPlaylist()
     {
-        
+        int intAnswer = 0;
+        //get all playlists as number
+
+        //chose number
+        System.out.println("|>> Movies in \"" + playlistArray[intAnswer].getPlaylistName() +  "\":");
+        System.out.println("|> " + playlistArray[intAnswer].getMoviesAsString());
     }
     
     //a method show help text

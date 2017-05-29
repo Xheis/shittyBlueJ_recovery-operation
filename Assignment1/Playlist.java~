@@ -5,35 +5,30 @@
  * Use: Basically a mini MovieDatabase. When I started out it was it's own specific design, but in retrospect I would have just inherited the MovieDatabase and all it's functions. Or visa versa, if MovieDatabase required more stuff. 
  * Comments: Will require a rewrite depending on what we're allowed to use for Assignment
  */
+
 public class Playlist
 {
-    // instance variables - replace the example below with your own
-    private Movie movie1,movie2,movie3;
+
+    private Movie movie1,movie2,movie3; //we hold 3 seperate instances of the movies from the movie database. This was in lieu of using pointers, due to some technical difficulties
     private float totalDuration;
     private int totalSize;
+    private String playlistName;
     
     /**
      * Constructor for objects of class Playlist
      */
-    public Playlist()
+    public Playlist(String tempName)
     {
-        //Made the consturctor call the setMovie function, so later we can impliment functions that change the movies on the fly. It also prevents "empty" playlists from exisiting.
-        /*
-         *   
-         *   Movie newMovie1,Movie newMovie2,Movie newMovie3
-        setMovie(newMovie1,1);
-        setMovie(newMovie1,2);
-        setMovie(newMovie1,3);
-         */
-        movie1 = new Movie();
-        movie2 = new Movie();
-        movie3 = new Movie();
-        
+        //Made the consturctor call the movie constructor, so it prevents "empty" playlists from exisiting.
+        playlistName = tempName;
         //generates our totalDUration & totalSize; Again, this is important to make sure that whenever or whereever we create a Playlist we're making a valid playlist.
         initPlaylist();
     }
-    
-   
+
+    public String getPlaylistName()
+    {
+      return playlistName;
+    }
     //note that it's public, if we ever wanted to edit them on the fly
     public void setMovie(Movie newMovie,int movieNumber)
     {
@@ -85,8 +80,10 @@ public class Playlist
        sentinalMovieValue.setDuration(-1);
        return sentinalMovieValue;
     }
-       
-    private void deleteMovie(String movieName) 
+    
+
+    //deletes movies by searching for their name, and if a match is good it nulls it
+    public void deleteMovie(String movieName) 
    {
        
        //check movie one, if not there, shiift downwards
@@ -132,6 +129,9 @@ public class Playlist
     }
     
     
+
+    //get set methods
+    //-----------------------------------------------------------------------------------------------------------
     public String getPlaylistAsString()
     {
         String stringToPrint = "";
@@ -162,4 +162,6 @@ public class Playlist
     {
         return totalSize;
     }
+    
+    //-----------------------------------------------------------------------------------------------------------
 }

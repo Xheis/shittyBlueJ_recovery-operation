@@ -1,17 +1,17 @@
 #BlueJ package file
-dependency1.from=Playlist
+dependency1.from=MovieDatabase
 dependency1.to=Movie
 dependency1.type=UsesDependency
-dependency2.from=MovieDatabase
-dependency2.to=Movie
+dependency2.from=Interface
+dependency2.to=Playlist
 dependency2.type=UsesDependency
 dependency3.from=Interface
-dependency3.to=Playlist
+dependency3.to=MovieDatabase
 dependency3.type=UsesDependency
 dependency4.from=Interface
-dependency4.to=MovieDatabase
+dependency4.to=Movie
 dependency4.type=UsesDependency
-dependency5.from=Interface
+dependency5.from=Playlist
 dependency5.to=Movie
 dependency5.type=UsesDependency
 editor.fx.0.height=694

@@ -14,11 +14,10 @@ public class Interface {
      * Private Varaibles for encapsulation
      */
     
-    private Playlist playlist1,playlist2;   //2 playlists are delcared in interface as required. Would replace with playlistArray[] as needed
+    private Playlist playlistArray[];   //2 playlists are delcared in interface as required. Would replace with playlistArray[] as needed
     private MovieDatabase database;         //A single movie database is used
     private boolean exit;                   //exit is used to to exit our program's input while loop
-    private int movieCount;                 //movieCount is a int used to count the number of movies we have
-    private int playlistCount;              //playlistCount is a int used to count the number of playlists we have
+    private int logicalSize = 2;              //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
     
     private Scanner console = new Scanner(System.in);   //the console will mainly be used
 
@@ -36,17 +35,16 @@ public class Interface {
     //and movie database
     private void run() 
     {
-        initInterface();    //initialise all our variables we'll need to start
+        //initInterface();    //initialise all our variables we'll need to start
         launchTIO();    //launch our TIO-driven command loop
     }
 
-    //init our variables, which is mainly just calling initialising constructors of our classes
-    private void initInterface()
+    //init our variables, which is mainly just calling initialising constructors of our classes. Could be a constructor, but I'll leave it as is.
+    //private void initInterface()
+    public Interface()
     {
-       playlist1 = new Playlist();
-       playlist2 = new Playlist();
+       playlistArray = new Playlist[playlistArray];
        database = new MovieDatabase();
-       movieCount = 0;  //tells us we have 0 movies at the present.
     }
 
     //this method will run our user interface via TIO
@@ -147,7 +145,9 @@ public class Interface {
 
                         case 14: editMovie();break; 
 
-                        case 15: exit();break; 
+                        case 15: editPlaylist();break; 
+
+                        case 16: exit();break; 
 
                         default: 
                             //Error: Not recognised command
@@ -214,8 +214,7 @@ public class Interface {
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-            //System.out.println("|> movieCount:" + movieCount);
-        database.setMovie(tempMovie);//,movieCount);
+        database.setMovie(tempMovie);
         //null everything, I think we could have a unforseen issues otherwise.
         tempName = "";
         tempDirector = "";
@@ -223,14 +222,13 @@ public class Interface {
         tempDuration = -2;
         tempMovie = new Movie();
 
-        movieCount++; //we're 0 indexed for our movies 0-3. 
 
         System.out.println("|");
         System.out.print("|>");
         }
         else
         {
-           System.out.println("|>> New Movie Made!"); 
+           System.out.println("|>> This movie already exists!"); 
            System.out.println("|");
            System.out.print("|>");
         }
@@ -239,7 +237,23 @@ public class Interface {
     //a method show help text
     private void newPlaylist()
     {
-        
+    	String tempName;                        
+        //enter Name
+        System.out.println("|>> Enter Name of new Playlist");
+        System.out.println("|");
+        System.out.print("|> ");
+        tempName = console.nextLine();
+
+        Playlist tempPlaylist = new Playlist(tempName);
+        addNewPlaylist(tempPlaylist);
+    }
+
+    private void addNewPlaylist(Playlist tempPlaylist)
+    {
+		Playlist tempPlaylists[] = new Playlist[logicalSize+1];
+		chrisCopy2implimentation(playlistArray,tempPlaylists,tempPlaylist);
+		playlistArray = tempPlaylists;
+		logicalSize++;
     }
     
     //a method show help text
@@ -314,6 +328,33 @@ public class Interface {
         
     }
     
+     //a method show help text
+    private void editPlaylist()
+    {
+    	System.out.println("|>> Showing all Playlists");
+        System.out.println("|");
+        //loop all playlists, show them numbered;
+    	for (int i = 0; i < logicalSize; i++) 
+    	{
+    		if (i < 10) 
+    		{
+    			System.out.println("|> " + Integer.toString(i) + "  - " + playlistArray[i].getPlaylistName());	
+    		}
+    		else
+    		{
+    			System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());	
+    		}
+    		
+    	}
+        //ask user to add by number
+
+        //ask user if they'd like to stop
+
+        System.out.println("|");
+        System.out.print("|> ");
+    }
+
+
     //a method show help text
     private void exit()
     {
@@ -332,6 +373,17 @@ public class Interface {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+    }
+
+
+    //chrisCopy2implimentation from Lecture 9
+    private void chrisCopy2implimentation(Playlist array1[], Playlist array2[], Playlist newPlaylist)
+    {
+      for(int i=0; i< array1.length; i++)
+      {
+        array2[i] = array1[i];
+      }
+      array2[array1.length] = newPlaylist;
     }
 
 }

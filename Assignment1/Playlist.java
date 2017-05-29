@@ -6,13 +6,14 @@
  * Comments: Will require a rewrite depending on what we're allowed to use for Assignment
  */
 
-public class Playlist
+public class Playlist extends MovieDatabase
 {
 
-    private Movie movie1,movie2,movie3; //we hold 3 seperate instances of the movies from the movie database. This was in lieu of using pointers, due to some technical difficulties
+    //private Movie movieArray[]; //movie1,movie2,movie3; //we hold 3 seperate instances of the movies from the movie database. This was in lieu of using pointers, due to some technical difficulties
     private float totalDuration;
     private int totalSize;
     private String playlistName;
+    //private int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
     
     /**
      * Constructor for objects of class Playlist
@@ -21,124 +22,24 @@ public class Playlist
     {
         //Made the consturctor call the movie constructor, so it prevents "empty" playlists from exisiting.
         playlistName = tempName;
+        movieArray = new Movie[logicalSize];
         //generates our totalDUration & totalSize; Again, this is important to make sure that whenever or whereever we create a Playlist we're making a valid playlist.
-        initPlaylist();
+        //initPlaylist();
     }
 
     public String getPlaylistName()
     {
       return playlistName;
     }
-    //note that it's public, if we ever wanted to edit them on the fly
-    public void setMovie(Movie newMovie,int movieNumber)
-    {
-       //catch non-ints
-       
-       switch  (movieNumber)
-       {
-          case 0:
-                movie1 = newMovie;
-                break;
-          case 1:
-                movie2 = newMovie;
-                break;
-          case 2:
-                movie3 = newMovie;
-                break;
-          default:
-                //error
-                //msgbox error!
-                break;
-       }
-       initPlaylist();
-    }  
-    
-   private Movie getMovie(int movieNumber)
-   {
-       //catch non-ints
-       
-       switch  (movieNumber)
-       {
-          case 0:
-                return movie1;
-          case 1:
-                return movie2;
-          case 2:
-                return movie3;
-          default:
-                //error
-                //msgbox error!
-                //we're bastardising this for use in some sanitity checks in Interface.js line 298. Expect this to change when we can do better checks with arrays.
-                break;
-       }
-       // IF we have made it to this park of the code, we're in trouble. We've been unable to return the requested movie, so we'll send a sentinal indicator back (i.e. our sentinalMovieValue)
-       Movie sentinalMovieValue;
-       sentinalMovieValue = new Movie();
-       sentinalMovieValue.setName("Movie Not Found!");
-       sentinalMovieValue.setDirector("Sentinal");
-       sentinalMovieValue.setFileSize(-1);
-       sentinalMovieValue.setDuration(-1);
-       return sentinalMovieValue;
-    }
-    
+ 
 
-    //deletes movies by searching for their name, and if a match is good it nulls it
-    public void deleteMovie(String movieName) 
-   {
-       
-       //check movie one, if not there, shiift downwards
-       
-       //
-       /*
-        * int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  public void addMovieToPlaylist(Movie newMovie)
+  {
+    setMovie(newMovie)  //inherited from MovieDatabase
+    initPlaylist();     //update playlist stats
+  }
 
-        // delete 3 (index 2)
-        for (int i = 2; i < 8; ++i)
-        array[i] = array[i + 1]; // copy next element left
-        */
-       
-       int indexOfMovie = -1;
-       for (int i = 0; i < 4; i++)
-       {
-           if (getMovie(i).getName().equalsIgnoreCase(movieName) )
-           {
-               indexOfMovie = i; break; //we assume we can only have the movie once in the playlist/moviedatabase
-           }
-       }
-       switch (indexOfMovie)
-       {
-           /* for (int i = 0; i < [database].getNumberOfMovies(); i++) //Code for array based playlists
-           { } */
-                   case 0:
-                        movie1 = movie2;
-                        movie2 = movie3;
-                        movie3 = new Movie();
-                        break;
-                   case 1:
-                        movie2 = movie3;
-                        movie3 = new Movie();
-                        break;
-                   case 2:
-                        movie3 = new Movie();
-                        break;
-                   default: 
-                       //u died. :(
-                       break;
-                        
-           }
-    }
-    
-    
 
-    //get set methods
-    //-----------------------------------------------------------------------------------------------------------
-    public String getPlaylistAsString()
-    {
-        String stringToPrint = "";
-        stringToPrint = movie1.getName() + "\n" + movie2.getName() + "\n" + movie3.getName() + "\n";
-        return stringToPrint;
-    }
-    
     private void initPlaylist()
     {
         createTotalDuration();
