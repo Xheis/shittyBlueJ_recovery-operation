@@ -133,7 +133,7 @@ public class MovieDatabase
             }
 
         }
-       }
+   
        if (stringToPrint.equals("")) {stringToPrint = "|>> Director not found.";}
            else 
            {
@@ -150,12 +150,12 @@ public class MovieDatabase
        
        
 
-       switch (index) //switch our our 4 deleting options. This shifts our database to allow for new movies to be added.
+       /*switch (index) //switch our our 4 deleting options. This shifts our database to allow for new movies to be added.
        {
            /* for (int i = 0; i < getlogicalSize(); i++) will be used later
            { } */
                
-                
+                /*
                    case 0:
                         movie1 = movie2;
                         movie2 = movie3;
@@ -177,14 +177,9 @@ public class MovieDatabase
                    default: 
                        //u died. :(
                        break;
-                        
+                        */
            }
        
     }
-       
-       
-       
-   }
-//------------------------------------------------------------------------------------------
 
 
