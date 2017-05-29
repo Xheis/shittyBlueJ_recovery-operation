@@ -170,8 +170,61 @@ public class Interface {
     //a method show help text
     private void newMovie()
     {
-        
-    }
+		String tempName,tempDirector;
+		int tempFileSize;
+		float tempDuration;
+
+		//enter Name
+		System.out.println("|>> Enter Name of Movie");
+		System.out.println("|");
+		System.out.print("|> ");
+		tempName = console.NextLine();
+
+		//enter Director	
+		System.out.println("|>> Enter Name of Director");
+		System.out.println("|");
+		System.out.print("|> ");	
+		tempDirector = console.NextLine();
+
+		//enter FileSize
+		System.out.println("|>> Enter FileSize of Movie (e.g. 512 for 512mb)");
+		System.out.println("|");
+		System.out.print("|> ");
+		tempFileSize = console.NextInt();
+
+		//enter Duration
+		System.out.println("|>> Enter Duration of Movie (e.g. 144.2 for 144.2 minutes))");
+		System.out.println("|");
+		System.out.print("|> ");
+		tempDuration = console.NextFloat();
+
+		tempMovie.setName(tempName);
+		tempMovie.setDirector(tempDirector);
+		tempMovie.setFileSize(tempFileSize);
+		tempMovie.setDuration(tempDuration);
+
+		if (database.getMovieNumber(tempName) == -1) //time to check if we have a duplicate movie by name: (Note: An assumption is made that all other meta data could theoretically be the same as a different, unique movie. We also butcher our "getMovieNumber()" method to check)
+	    {
+			System.out.println("|>> New Movie Made!");
+			System.out.println("|> Name: " + tempMovie.getName());
+			System.out.println("|> Director: " + tempMovie.getDirector());
+			System.out.println("|> FileSize: " + tempMovie.getFileSize());
+			System.out.println("|> Duration: " + tempMovie.getDuration());
+			System.out.println("|> movieCount:" + movieCount);
+		database.setMovie(tempMovie,movieCount);
+		//null everything, I think we could have a unforseen issues otherwise.
+		tempName = "";
+		tempDirector = "";
+		tempFileSize = -2;
+		tempDuration = -2;
+		tempMovie = new Movie();
+
+		movieCount++; //we're 0 indexed for our movies 0-3. 
+
+		System.out.println("|");
+		System.out.print("|>");
+		}
+	}
     
     //a method show help text
     private void newPlaylist()
