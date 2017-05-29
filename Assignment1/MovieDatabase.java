@@ -11,43 +11,53 @@ import java.text.*;
 public class MovieDatabase
 {
    //define our 4 movies
-    private Movie movie1,movie2,movie3,movie4;
+    //private Movie movie1,movie2,movie3,movie4;
+  private Movie movieArray[]
     
-    //this value will be used in lieu of a future dynamic array
-    private static int numberOfMovies = 4;
+  //this value will be used in lieu of a future dynamic array
+  private static int logicalSize = 1; //previously called MovieCount 28/05/17
     
-    
-    //This function is used in lieu of reading a future array length
-    public int getNumberOfMovies()
-    {
-        return numberOfMovies;
-    }
-    
-    /**
-     * Constructor for objects of class Playlist
-     */
+
+    /*
+    * Constructor for objects of class Playlist
+    */
     public MovieDatabase()
     {
         
-        movie1 = new Movie();
-        movie2 = new Movie();
-        movie3 = new Movie();
-        movie4 = new Movie();
-    }
+        movieArray = new Movie[logicalSize+1]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
+        movieArray[0] = new Movie();  //better set up the new one, incase we try to read.
+    } 
     
-    
-    private chrisCopy2implimentation(Movie array1[],Movie array2[])
+  //This function is used in lieu of reading a future array length
+  public int getLogicalSize()
     {
-
-
-      
+        return logicalSize;
     }
+    
+
+    
+    //chrisCopy2implimentation from Lecture 9
+    private Movie[] chrisCopy2implimentation(Movie array1[], Movie newMovie)
+    {
+      int[] returnArray = new int[array1.length+1];
+      for(int i=0; i< array1.length; i++)
+      {
+        returnArray[i] = array1[i];
+      }
+      return(returnArray);
+    }
+
+
 
 
     //Methods for getting/setting our private movies in the MovieDatabase
     //------------------------------------------------------------------------------------------
    public void setMovie(Movie newMovie);//,int movieNumber)
    {
+      //adds to array
+      movieArray = chrisCopy2implimentation(movieArray,newMovie);
+      logicalSize++;
+
        //catch non-ints
        
 
@@ -121,7 +131,7 @@ public class MovieDatabase
     
     public int getMovieNumber(String movieName)
    {
-     for (int i = 0; i < getNumberOfMovies(); i++)
+     for (int i = 0; i < getLogicalSize(); i++)
      {
          if (getMovie(i).getName().equalsIgnoreCase(movieName))
          {
@@ -137,7 +147,7 @@ public class MovieDatabase
    {
        //catch non-ints
        String stringToPrint = "";
-       for (int i = 0; i < getNumberOfMovies(); i++) 
+       for (int i = 0; i < getLogicalSize(); i++) 
        {
            
            switch (i) //switch on our 4 movies, changing index as we go. movie1 & switch could be swapped for movie[i];
@@ -177,7 +187,7 @@ public class MovieDatabase
 
        switch (index) //switch our our 4 deleting options. This shifts our database to allow for new movies to be added.
        {
-           /* for (int i = 0; i < getNumberOfMovies(); i++) will be used later
+           /* for (int i = 0; i < getlogicalSize(); i++) will be used later
            { } */
                
                 
