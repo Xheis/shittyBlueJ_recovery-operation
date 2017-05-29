@@ -12,7 +12,7 @@ public class MovieDatabase
 {
    //define our 4 movies
     //private Movie movie1,movie2,movie3,movie4;
-  private Movie movieArray[]
+  private Movie movieArray[];
     
   //this value will be used in lieu of a future dynamic array
   private static int logicalSize = 1; //previously called MovieCount 28/05/17
@@ -39,7 +39,7 @@ public class MovieDatabase
     //chrisCopy2implimentation from Lecture 9
     private Movie[] chrisCopy2implimentation(Movie array1[], Movie newMovie)
     {
-      int[] returnArray = new int[array1.length+1];
+      Movie[] returnArray = new Movie[array1.length+1];
       for(int i=0; i< array1.length; i++)
       {
         returnArray[i] = array1[i];
@@ -52,12 +52,11 @@ public class MovieDatabase
 
     //Methods for getting/setting our private movies in the MovieDatabase
     //------------------------------------------------------------------------------------------
-   public void setMovie(Movie newMovie);//,int movieNumber)
+   public void setMovie(Movie newMovie)//,int movieNumber)
    {
       //adds to array
       movieArray = chrisCopy2implimentation(movieArray,newMovie);
       logicalSize++;
-
        //catch non-ints
        
 
@@ -101,33 +100,11 @@ public class MovieDatabase
     
    public Movie getMovie(int movieNumber)
    {
-       //catch non-ints
-       
-       switch  (movieNumber)
-       {
-          case 0:
-                return movie1;
-          case 1:
-                return movie2;
-          case 2:
-                return movie3;
-          case 3:
-                return movie4;
-          default:
-                //error
-                //msgbox error!
-                //we're bastardising this for use in some sanitity checks in Interface.js line 298. Expect this to change when we can do better checks with arrays.
-                break;
-       }
-       // IF we have made it to this part of the code, we're in trouble. We've been unable to return the requested movie, so we'll send a sentinal indicator back (i.e. our sentinalMovieValue)
-       Movie sentinalMovieValue;
-       sentinalMovieValue = new Movie();
-       sentinalMovieValue.setName("Movie Not Found!");
-       sentinalMovieValue.setDirector("Sentinal");
-       sentinalMovieValue.setFileSize(-1);
-       sentinalMovieValue.setDuration(-1);
-       return sentinalMovieValue;
-    }  
+
+                return movieArray[movieNumber];
+
+   }
+
     
     public int getMovieNumber(String movieName)
    {
@@ -149,26 +126,14 @@ public class MovieDatabase
        String stringToPrint = "";
        for (int i = 0; i < getLogicalSize(); i++) 
        {
-           
-           switch (i) //switch on our 4 movies, changing index as we go. movie1 & switch could be swapped for movie[i];
-           {
-               case 0:
-                    if (movie1.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " + movie1.getName() + "\n";}
-                    break;
-               case 1:
-                    if (movie2.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " +  movie2.getName() + "\n";}
-                    break;
-               case 2:
-                    if (movie3.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " +  movie3.getName() + "\n";}
-                    break;
-               case 3:
-                    if (movie4.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " +  movie4.getName() + "\n";}
-                    break;
-               default: 
-                    stringToPrint += "!!!ERROR!!!";
-                    
-           }
-       }
+
+            if (movieArray[i].getDirector().equalsIgnoreCase(movieDirector))
+            {
+                stringToPrint += "|> " + movieArray[i].getName() + "\n";
+            }
+
+        }
+   
        if (stringToPrint.equals("")) {stringToPrint = "|>> Director not found.";}
            else 
            {

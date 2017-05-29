@@ -1,9 +1,8 @@
-
-/**
- * Write a description of class MovieDatabase here.
- *
- * @author (your name)
- * @version (a version number or a date)
+/* Name: Interface.java
+ * Author: Chris Caelli     Date: 4/03/17
+ * Purpose: Acts as interface between our User and all other classes.
+ * Use: Launch as a terminal application and follow the prompts
+ * Comments: 
  */
 
 import java.util.*;
@@ -11,36 +10,57 @@ import java.text.*;
 
 public class MovieDatabase
 {
-   
-    private Movie movie1,movie2,movie3,movie4;
+   //define our 4 movies
+    //private Movie movie1,movie2,movie3,movie4;
+  private Movie movieArray[];
     
-    //this value will be used in lieu of a future dynamic array
-    private static int numberOfMovies = 4;
+  //this value will be used in lieu of a future dynamic array
+  private static int logicalSize = 1; //previously called MovieCount 28/05/17
     
-    
-    //This function is used in lieu of reading a future array length
-    public int getNumberOfMovies()
-    {
-        return numberOfMovies;
-    }
-    
-    /**
-     * Constructor for objects of class Playlist
-     */
+
+    /*
+    * Constructor for objects of class Playlist
+    */
     public MovieDatabase()
     {
         
-        movie1 = new Movie();
-        movie2 = new Movie();
-        movie3 = new Movie();
-        movie4 = new Movie();
+        movieArray = new Movie[logicalSize+1]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
+        movieArray[0] = new Movie();  //better set up the new one, incase we try to read.
+    } 
+    
+  //This function is used in lieu of reading a future array length
+  public int getLogicalSize()
+    {
+        return logicalSize;
     }
     
-   public void setMovie(Movie newMovie,int movieNumber)
+
+    
+    //chrisCopy2implimentation from Lecture 9
+    private Movie[] chrisCopy2implimentation(Movie array1[], Movie newMovie)
+    {
+      Movie[] returnArray = new Movie[array1.length+1];
+      for(int i=0; i< array1.length; i++)
+      {
+        returnArray[i] = array1[i];
+      }
+      return(returnArray);
+    }
+
+
+
+
+    //Methods for getting/setting our private movies in the MovieDatabase
+    //------------------------------------------------------------------------------------------
+   public void setMovie(Movie newMovie)//,int movieNumber)
    {
+      //adds to array
+      movieArray = chrisCopy2implimentation(movieArray,newMovie);
+      logicalSize++;
        //catch non-ints
        
-       switch  (movieNumber)
+
+       /*switch  (movieNumber)
        {
           case 0:
                 movie1 = newMovie;
@@ -75,42 +95,20 @@ public class MovieDatabase
                 //error
                 //msgbox error!
                 break;
-       }
+       } */
     }   
     
    public Movie getMovie(int movieNumber)
    {
-       //catch non-ints
-       
-       switch  (movieNumber)
-       {
-          case 0:
-                return movie1;
-          case 1:
-                return movie2;
-          case 2:
-                return movie3;
-          case 3:
-                return movie4;
-          default:
-                //error
-                //msgbox error!
-                //we're bastardising this for use in some sanitity checks in Interface.js line 298. Expect this to change when we can do better checks with arrays.
-                break;
-       }
-       // IF we have made it to this park of the code, we're in trouble. We've been unable to return the requested movie, so we'll send a sentinal indicator back (i.e. our sentinalMovieValue)
-       Movie sentinalMovieValue;
-       sentinalMovieValue = new Movie();
-       sentinalMovieValue.setName("Movie Not Found!");
-       sentinalMovieValue.setDirector("Sentinal");
-       sentinalMovieValue.setFileSize(-1);
-       sentinalMovieValue.setDuration(-1);
-       return sentinalMovieValue;
-    }  
+
+                return movieArray[movieNumber];
+
+   }
+
     
     public int getMovieNumber(String movieName)
    {
-     for (int i = 0; i < getNumberOfMovies(); i++)
+     for (int i = 0; i < getLogicalSize(); i++)
      {
          if (getMovie(i).getName().equalsIgnoreCase(movieName))
          {
@@ -120,31 +118,21 @@ public class MovieDatabase
      return -1; //error code. -1 indicates an error e.g. movie not found.
    }  
     
+
+    //method to search our 4 movies by director name
     public String getMovieByDirector(String movieDirector)
    {
        //catch non-ints
        String stringToPrint = "";
-       for (int i = 0; i < getNumberOfMovies(); i++) 
+       for (int i = 0; i < getLogicalSize(); i++) 
        {
-           
-           switch (i)
-           {
-               case 0:
-                    if (movie1.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " + movie1.getName() + "\n";}
-                    break;
-               case 1:
-                    if (movie2.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " +  movie2.getName() + "\n";}
-                    break;
-               case 2:
-                    if (movie3.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " +  movie3.getName() + "\n";}
-                    break;
-               case 3:
-                    if (movie4.getDirector().equalsIgnoreCase(movieDirector)){stringToPrint += "|> " +  movie4.getName() + "\n";}
-                    break;
-               default: 
-                    stringToPrint += "!!!ERROR!!!";
-                    
-           }
+
+            if (movieArray[i].getDirector().equalsIgnoreCase(movieDirector))
+            {
+                stringToPrint += "|> " + movieArray[i].getName() + "\n";
+            }
+
+        }
        }
        if (stringToPrint.equals("")) {stringToPrint = "|>> Director not found.";}
            else 
@@ -155,26 +143,19 @@ public class MovieDatabase
        return stringToPrint;
    }
    
-    
+
+   //method to delete
    public void deleteMovie(int index) 
    {
        
-       //check movie one, if not there, shiift downwards
        
-       //
-       /*
-        * int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        // delete 3 (index 2)
-        for (int i = 2; i < 8; ++i)
-        array[i] = array[i + 1]; // copy next element left
-        */
-       switch (index)
+       switch (index) //switch our our 4 deleting options. This shifts our database to allow for new movies to be added.
        {
-           /* for (int i = 0; i < getNumberOfMovies(); i++)
+           /* for (int i = 0; i < getlogicalSize(); i++) will be used later
            { } */
                
-               
+                
                    case 0:
                         movie1 = movie2;
                         movie2 = movie3;
@@ -204,6 +185,6 @@ public class MovieDatabase
        
        
    }
-
+//------------------------------------------------------------------------------------------
 
 
