@@ -176,8 +176,8 @@ public class Interface {
         float tempDuration;
         //set up a temp. movie variable, for us to pass to the database to store.
         Movie tempMovie;
-	    tempMovie = new Movie();
-	                    
+        tempMovie = new Movie();
+                        
         //enter Name
         System.out.println("|>> Enter Name of Movie");
         System.out.println("|");
@@ -228,6 +228,12 @@ public class Interface {
         System.out.println("|");
         System.out.print("|>");
         }
+        else
+        {
+           System.out.println("|>> This movie already exists!"); 
+           System.out.println("|");
+           System.out.print("|>");
+        }
     }
     
     //a method show help text
@@ -239,11 +245,11 @@ public class Interface {
     //a method show help text
     private void listMovies()
     {
-    	System.out.println("|>> Movies in Database:");
+        System.out.println("|>> Movies in Database:");
         System.out.println("|");
         for (int i = 0; i < database.getLogicalSize(); i++) 
         {
-        	System.out.println("|> " + database.getMovie(i).getName());
+            System.out.println("|> " + database.getMovie(i).getName());
         }
         System.out.print("|> ");
     }
