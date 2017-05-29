@@ -144,53 +144,49 @@ public class Interface {
 
 	                switch(convertedAnswer)
 	                {
-	                	case 1:
+	                	case 1: help();break; 
 
-	                	case 2:
+	                	case 2: newMovie();break; 
 
-	                	case 3:
+	                	case 3: newPlaylist();break; 
 
-	                	case 4:
+	                	case 4: listMovies();break; 
 
-	                	case 5:
+	                	case 5: listPlaylists();break; 
 
-	                	case 6:
+	                	case 6: listMoviesInSpecificPlaylist();break; 
 
-	                	case 7:
+	                	case 7: listByMovieDirector();break; 
 
-	                	case 8:
+	                	case 8: deleteFromPlaylist();break; 
 
-	                	case 9:
+	                	case 9: deletePlaylist();break; 
 
-	                	case 10:
+	                	case 10: deleteMovie();break; 
 
-	                	case 11:
+	                	case 11: saveMovieDatabase();break; 
 
-	                	case 12:
+	                	case 12: openMovieDatabase();break; 
 
-	                	case 13:
+	                	case 13: listMoviesUnderSpecificRuntime();break; 
 
-	                	case 14:
+	                	case 14: editMovie();break; 
 
-	                	case 15:
+	                	case 15: exit();break; 
 
-	                	default:
-	                		
+	                	default: 
+	                	    //Error: Not recognised command
+	                		System.out.println("|");
+	                        System.out.println("|>> Not a recognised command. Please enter again \n");
+	                        System.out.println("|");
+	                        System.out.print("|> ");
+	                        error = true;
 	                }
-
-	                {
-	                    System.out.println("|");
-	                    error = printCommandsString();
-	                    break; //overkill, but I feel safer to have both methods of ending the rotuine
-	                }
-	                       
-	                    }
-
 	    }while (error == true);
 	}
 
  //a method show help text
-    private boolean help()
+    private void help()
     {
         System.out.println("|");
 	    printCommandsString();
