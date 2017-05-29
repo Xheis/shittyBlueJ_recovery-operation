@@ -271,7 +271,7 @@ public class Interface {
     //a method show help text
     private void listPlaylists()
     {
-    	System.out.println("|>> Playlists in System:"
+    	System.out.println("|>> Playlists in System:");
         for (int i = 0; i < logicalSize; i++)
         {
         	System.out.println("|> " + playlistArray[i].getName());

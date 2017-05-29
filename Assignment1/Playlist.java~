@@ -22,7 +22,7 @@ public class Playlist extends MovieDatabase
     {
         //Made the consturctor call the movie constructor, so it prevents "empty" playlists from exisiting.
         playlistName = tempName;
-        this.movieArray = new Movie[logicalSize];
+        movieArray = new Movie[logicalSize];
         //generates our totalDUration & totalSize; Again, this is important to make sure that whenever or whereever we create a Playlist we're making a valid playlist.
         //initPlaylist();
     }
@@ -48,7 +48,10 @@ public class Playlist extends MovieDatabase
     
     private void createTotalDuration()
     {
-        totalDuration = movie1.getDuration() + movie2.getDuration() + movie3.getDuration();
+       for (int i = 0; i < logicalSize; i++)
+        {
+        	totalDuration += movieArray[i].getDuration();
+        }    
     }
     public float getTotalDuration()
     {
@@ -57,6 +60,10 @@ public class Playlist extends MovieDatabase
         
     private void createTotalSize()
     {
+               for (int i = 0; i < logicalSize; i++)
+        {
+        	totalSize += movieArray[i].getFileSize();
+        }    
         totalSize = movie1.getFileSize() + movie2.getFileSize() + movie3.getFileSize();
     }
     public float getTotalSize()

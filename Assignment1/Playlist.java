@@ -48,7 +48,10 @@ public class Playlist extends MovieDatabase
     
     private void createTotalDuration()
     {
-        totalDuration = movie1.getDuration() + movie2.getDuration() + movie3.getDuration();
+       for (int i = 0; i < logicalSize; i++)
+        {
+        	totalDuration += movieArray[i].getDuration();
+        }    
     }
     public float getTotalDuration()
     {
@@ -57,7 +60,10 @@ public class Playlist extends MovieDatabase
         
     private void createTotalSize()
     {
-        totalSize = movie1.getFileSize() + movie2.getFileSize() + movie3.getFileSize();
+               for (int i = 0; i < logicalSize; i++)
+        {
+        	totalSize += movieArray[i].getFileSize();
+        }    
     }
     public float getTotalSize()
     {

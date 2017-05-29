@@ -274,7 +274,7 @@ public class Interface {
     	System.out.println("|>> Playlists in System:");
         for (int i = 0; i < logicalSize; i++)
         {
-        	System.out.println("|> " + playlistArray[i].getName());
+        	System.out.println("|> " + playlistArray[i].getPlaylistName());
         }
         System.out.print("|> ");
     }
