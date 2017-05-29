@@ -167,10 +167,7 @@ public class Interface {
         printCommandsString();
     }
     
-        public void debugPrint(String debugString)
-    {
-        System.out.println(debugString);
-    }
+
     //a method show help text
     private void newMovie()
     {

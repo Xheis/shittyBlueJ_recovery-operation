@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=MovieDatabase
-comment1.params=consoleParent
-comment1.target=MovieDatabase(java.util.Scanner)
+comment1.params=
+comment1.target=MovieDatabase()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Playlist\r\n
 comment10.params=index
 comment10.target=void\ deleteMovie(int)
