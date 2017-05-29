@@ -17,7 +17,7 @@ public class Interface {
     private Playlist playlistArray[];   //2 playlists are delcared in interface as required. Would replace with playlistArray[] as needed
     private MovieDatabase database;         //A single movie database is used
     private boolean exit;                   //exit is used to to exit our program's input while loop
-    private int logicalSize = 2;              //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
+    private int logicalSize = 0;              //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
     
     private Scanner console = new Scanner(System.in);   //the console will mainly be used
 
@@ -237,7 +237,8 @@ public class Interface {
     //a method show help text
     private void newPlaylist()
     {
-    	String tempName;                        
+        String tempName;
+        int intAnswer = 0;
         //enter Name
         System.out.println("|>> Enter Name of new Playlist");
         System.out.println("|");
@@ -245,15 +246,25 @@ public class Interface {
         tempName = console.nextLine();
 
         Playlist tempPlaylist = new Playlist(tempName);
+        //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
+        System.out.println("|>> Enter Name of new Playlist");
+        do
+        {
+            intAnswer = showNumberedMovies();
+            tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
+    }while(intAnswer!=-1);
+    
         addNewPlaylist(tempPlaylist);
+        System.out.println("|");
+        System.out.print("|> ");
     }
 
     private void addNewPlaylist(Playlist tempPlaylist)
     {
-		Playlist tempPlaylists[] = new Playlist[logicalSize+1];
-		chrisCopy2implimentation(playlistArray,tempPlaylists,tempPlaylist);
-		playlistArray = tempPlaylists;
-		logicalSize++;
+        Playlist tempPlaylists[] = new Playlist[logicalSize+1];
+        chrisCopy2implimentation(playlistArray,tempPlaylists,tempPlaylist);
+        playlistArray = tempPlaylists;
+        logicalSize++;
     }
     
     //a method show help text
@@ -271,10 +282,10 @@ public class Interface {
     //a method show help text
     private void listPlaylists()
     {
-    	System.out.println("|>> Playlists in System:");
+        System.out.println("|>> Playlists in System:");
         for (int i = 0; i < logicalSize; i++)
         {
-        	System.out.println("|> " + playlistArray[i].getName());
+            System.out.println("|> " + playlistArray[i].getPlaylistName());
         }
         System.out.print("|> ");
     }
@@ -335,35 +346,64 @@ public class Interface {
         
     }
     
-	private int showNumberedPlaylists()
-	{
-		int intAnswer = -1;
-		System.out.println("|>> Showing all Playlists");
+    private int showNumberedPlaylists()
+    {
+        int intAnswer = -1;
+        System.out.println("|>> Showing all Playlists");
         System.out.println("|");
         //loop all playlists, show them numbered;
-    	for (int i = 0; i < logicalSize; i++) 
-    	{
-    		if (i < 10) 
-    		{
-    			System.out.println("|> " + Integer.toString(i) + "  - " + playlistArray[i].getPlaylistName());	
-    		}
-    		else
-    		{
-    			System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());	
-    		}
-    	}
+        for (int i = 0; i < logicalSize; i++) 
+        {
+            if (i < 10) 
+            {
+                System.out.println("|> " + Integer.toString(i) + "  - " + playlistArray[i].getPlaylistName());  
+            }
+            else
+            {
+                System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());   
+            }
+        }
         //ask user to add by number
         System.out.println("| ");
         System.out.println("|> Please choose a playlist");
         System.out.print("|> ");
         intAnswer = console.nextInt();
         return(intAnswer);
-	}
+    }
+    
+    private int showNumberedMovies()
+    {
+        int intAnswer = -1;
+        System.out.println("|>> Showing all Movies");
+        System.out.println("|");
+        //loop all playlists, show them numbered;
+        for (int i = 0; i < logicalSize; i++) 
+        {
+            if (i < 10) 
+            {
+                System.out.println("|> " + Integer.toString(i) + "   - " + database.getMovie(i).getName()); 
+            }
+            else if (i < 100) 
+            {
+                System.out.println("|> " + Integer.toString(i) + "  - " + database.getMovie(i).getName());  
+            }
+            else
+            {
+                System.out.println("|> " + Integer.toString(i) + " - " + database.getMovie(i).getName());   
+            }
+        }
+        //ask user to add by number
+        System.out.println("| ");
+        System.out.println("|> Please choose a movie");
+        System.out.print("|> ");
+        intAnswer = console.nextInt();
+        return(intAnswer);
+    }
 
      //a method show help text
     private void editPlaylist()
     {
-    	
+        
 
         //ask user if they'd like to stop
 
