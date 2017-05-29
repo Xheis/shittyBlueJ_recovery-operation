@@ -45,7 +45,7 @@ public class Interface {
     {
        playlist1 = new Playlist();
        playlist2 = new Playlist();
-       database = new MovieDatabase();
+       database = new MovieDatabase(console);
        movieCount = 0;  //tells us we have 0 movies at the present.
     }
 
@@ -167,6 +167,10 @@ public class Interface {
         printCommandsString();
     }
     
+        public void debugPrint(String debugString)
+    {
+        System.out.println(debugString);
+    }
     //a method show help text
     private void newMovie()
     {
@@ -175,7 +179,7 @@ public class Interface {
         float tempDuration;
         //set up a temp. movie variable, for us to pass to the database to store.
         Movie tempMovie;
-	                    tempMovie = new Movie();
+	    tempMovie = new Movie();
 	                    
         //enter Name
         System.out.println("|>> Enter Name of Movie");
@@ -213,8 +217,8 @@ public class Interface {
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-            System.out.println("|> movieCount:" + movieCount);
-        database.setMovie(tempMovie,movieCount);
+            //System.out.println("|> movieCount:" + movieCount);
+        database.setMovie(tempMovie);//,movieCount);
         //null everything, I think we could have a unforseen issues otherwise.
         tempName = "";
         tempDirector = "";
@@ -238,7 +242,13 @@ public class Interface {
     //a method show help text
     private void listMovies()
     {
-        
+    	System.out.println("|>> Movies in Database:");
+        System.out.println("|");
+        for (int i = 0; i < database.getLogicalSize(); i++) 
+        {
+        	System.out.println("|> " + database.getMovie(i).getName());
+        }
+        System.out.print("|> ");
     }
     
     //a method show help text

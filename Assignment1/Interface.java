@@ -45,7 +45,7 @@ public class Interface {
     {
        playlist1 = new Playlist();
        playlist2 = new Playlist();
-       database = new MovieDatabase();
+       database = new MovieDatabase(console);
        movieCount = 0;  //tells us we have 0 movies at the present.
     }
 
@@ -167,6 +167,7 @@ public class Interface {
         printCommandsString();
     }
     
+
     //a method show help text
     private void newMovie()
     {

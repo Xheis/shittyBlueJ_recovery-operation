@@ -16,23 +16,29 @@ public class MovieDatabase
     
   //this value will be used in lieu of a future dynamic array
   private int logicalSize = 1; //previously called MovieCount 28/05/17  //was static
-    
+  private Scanner console; 
 
     /*
     * Constructor for objects of class Playlist
     */
-    public MovieDatabase()
+    public MovieDatabase(Scanner consoleParent)
     {
+        console = consoleParent;
         movieArray = new Movie[logicalSize]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
         movieArray[0] = new Movie();  //better set up the new one, incase we try to read.
     } 
     
-  //This function is used in lieu of reading a future array length
-  public int getLogicalSize()
+    //This function is used in lieu of reading a future array length
+    public int getLogicalSize()
     {
         return logicalSize;
     }
     
+    
+    public void debugPrint(String debugString)
+    {
+        System.out.println(debugString);
+    }
 
     
     //chrisCopy2implimentation from Lecture 9
@@ -42,8 +48,9 @@ public class MovieDatabase
       for(int i=0; i< array1.length; i++)
       {
         array2[i] = array1[i];
+        debugPrint = 
       }
-      newMovie[array1.length] = new Movie(); 
+      array2[array1.length] = new Movie(); 
       //return(returnArray);
     }
 
@@ -66,8 +73,10 @@ public class MovieDatabase
       Movie tempMovies[] = new Movie[logicalSize+1];
       //tempMovies = chrisCopy2implimentation(movieArray,newMovie);
       chrisCopy2implimentation(movieArray,tempMovies,newMovie);
+      movieArray = tempMovies;
       //movieArray = tempMovies;
-      String tempstring = movieArray[logicalSize].getName();
+      String tempstring = movieArray[logicalSize-1].getName();
+      String tempstring2 = tempMovies[logicalSize-1].getName();
       logicalSize++;
     }   
     
