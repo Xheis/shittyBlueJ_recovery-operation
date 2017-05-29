@@ -145,7 +145,9 @@ public class Interface {
 
                         case 14: editMovie();break; 
 
-                        case 15: exit();break; 
+                        case 15: editPlaylist();break; 
+
+                        case 16: exit();break; 
 
                         default: 
                             //Error: Not recognised command
@@ -235,7 +237,23 @@ public class Interface {
     //a method show help text
     private void newPlaylist()
     {
-        
+    	String tempName;                        
+        //enter Name
+        System.out.println("|>> Enter Name of new Playlist");
+        System.out.println("|");
+        System.out.print("|> ");
+        tempName = console.nextLine();
+
+        Playlist tempPlaylist = new Playlist(tempName);
+        addNewPlaylist(tempPlaylist);
+    }
+
+    private void addNewPlaylist(Playlist tempPlaylist)
+    {
+		Playlist tempPlaylists[] = new Playlist[logicalSize+1];
+		chrisCopy2implimentation(playlistArray,tempPlaylists,tempPlaylist);
+		playlistArray = tempPlaylists;
+		logicalSize++;
     }
     
     //a method show help text
@@ -310,6 +328,33 @@ public class Interface {
         
     }
     
+     //a method show help text
+    private void editPlaylist()
+    {
+    	System.out.println("|>> Showing all Playlists");
+        System.out.println("|");
+        //loop all playlists, show them numbered;
+    	for (int i = 0; i < logicalSize; i++) 
+    	{
+    		if (i < 10) 
+    		{
+    			System.out.println("|> " + Integer.toString(i) + "  - " + playlistArray[i].getPlaylistName());	
+    		}
+    		else
+    		{
+    			System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());	
+    		}
+    		
+    	}
+        //ask user to add by number
+
+        //ask user if they'd like to stop
+
+        System.out.println("|");
+        System.out.print("|> ");
+    }
+
+
     //a method show help text
     private void exit()
     {
@@ -328,6 +373,17 @@ public class Interface {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+    }
+
+
+    //chrisCopy2implimentation from Lecture 9
+    private void chrisCopy2implimentation(Playlist array1[], Playlist array2[], Playlist newPlaylist)
+    {
+      for(int i=0; i< array1.length; i++)
+      {
+        array2[i] = array1[i];
+      }
+      array2[array1.length] = newPlaylist;
     }
 
 }

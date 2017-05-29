@@ -12,23 +12,23 @@ public class Playlist
     private Movie movie1,movie2,movie3; //we hold 3 seperate instances of the movies from the movie database. This was in lieu of using pointers, due to some technical difficulties
     private float totalDuration;
     private int totalSize;
+    private String playlistName;
     
     /**
      * Constructor for objects of class Playlist
      */
-    public Playlist()
+    public Playlist(String tempName)
     {
         //Made the consturctor call the movie constructor, so it prevents "empty" playlists from exisiting.
-
-        movie1 = new Movie();
-        movie2 = new Movie();
-        movie3 = new Movie();
-        
+        playlistName = tempName;
         //generates our totalDUration & totalSize; Again, this is important to make sure that whenever or whereever we create a Playlist we're making a valid playlist.
         initPlaylist();
     }
-    
-   
+
+    public String getPlaylistName()
+    {
+      return playlistName;
+    }
     //note that it's public, if we ever wanted to edit them on the fly
     public void setMovie(Movie newMovie,int movieNumber)
     {
