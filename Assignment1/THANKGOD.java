@@ -29,13 +29,13 @@
     }
     
     //a method show help text
-    private void listSpecificPlaylist()
+    private void listMoviesInSpecificPlaylist()
     {
         
     }
     
     //a method show help text
-    private void ListByMovieDirector()
+    private void listByMovieDirector()
     {
         
     }
@@ -71,7 +71,7 @@
     }
     
      //a method show help text
-    private void listMoviesUnderSpecificMinutes()
+    private void listMoviesUnderSpecificRuntime()
     {
         
     }
