@@ -43,7 +43,7 @@ public class Interface {
     //private void initInterface()
     public Interface()
     {
-       playlistArray = new Playlist[playlistArray];
+       playlistArray = new Playlist[logicalSize];
        database = new MovieDatabase();
     }
 
@@ -271,13 +271,20 @@ public class Interface {
     //a method show help text
     private void listPlaylists()
     {
-        
+    	System.out.println("|>> Playlists in System:"
+        for (int i = 0; i < logicalSize; i++)
+        {
+        	System.out.println("|> " + playlistArray[i].getName());
+        }
+        System.out.print("|> ");
     }
     
     //a method show help text
     private void listMoviesInSpecificPlaylist()
     {
-        
+        int intAnswer = showNumberedPlaylists();
+        System.out.println("|>> Movies in \"" + playlistArray[intAnswer].getPlaylistName() +  "\":");
+        System.out.println("|> " + playlistArray[intAnswer].getMoviesAsString());
     }
     
     //a method show help text
@@ -328,10 +335,10 @@ public class Interface {
         
     }
     
-     //a method show help text
-    private void editPlaylist()
-    {
-    	System.out.println("|>> Showing all Playlists");
+	private int showNumberedPlaylists()
+	{
+		int intAnswer = -1;
+		System.out.println("|>> Showing all Playlists");
         System.out.println("|");
         //loop all playlists, show them numbered;
     	for (int i = 0; i < logicalSize; i++) 
@@ -344,9 +351,19 @@ public class Interface {
     		{
     			System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());	
     		}
-    		
     	}
         //ask user to add by number
+        System.out.println("| ");
+        System.out.println("|> Please choose a playlist");
+        System.out.print("|> ");
+        intAnswer = console.nextInt();
+        return(intAnswer);
+	}
+
+     //a method show help text
+    private void editPlaylist()
+    {
+    	
 
         //ask user if they'd like to stop
 

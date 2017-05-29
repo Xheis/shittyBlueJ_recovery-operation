@@ -35,7 +35,7 @@ public class Playlist extends MovieDatabase
 
   public void addMovieToPlaylist(Movie newMovie)
   {
-    setMovie(newMovie)  //inherited from MovieDatabase
+    setMovie(newMovie);  //inherited from MovieDatabase
     initPlaylist();     //update playlist stats
   }
 

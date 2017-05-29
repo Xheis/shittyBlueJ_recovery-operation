@@ -12,8 +12,8 @@ public class MovieDatabase
 {
    //define our 4 movies
     //private Movie movie1,movie2,movie3,movie4;
-  private Movie movieArray[];
-  private int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
+  protected Movie movieArray[];
+  protected int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
 
     /*
     * Constructor for objects of class Playlist
