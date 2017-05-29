@@ -57,14 +57,13 @@ public class MovieDatabase
    {
       //adds to array
       movieArray = chrisCopy2implimentation(movieArray,newMovie);
+      String tempstring = movieArray[logicalSize].getName();
       logicalSize++;
     }   
     
    public Movie getMovie(int movieNumber)
    {
-
-                return movieArray[movieNumber];
-
+      return movieArray[movieNumber];
    }
 
     
