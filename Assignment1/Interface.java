@@ -36,33 +36,8 @@ public class Interface {
     //and movie database
 	private void run() 
 	{
-    
-    initInterface();	//initialise all our variables we'll need to start
-    
-
-    String answer;  //console answer
-    boolean error;  //answer error flag
-    error = false;
-    do {	//Do loop used to get an acceptable answer
-
-            //Take user input on TIO or GUI?
-            System.out.println("Would you like to enter GUI or TIO?");
-            answer = console.nextLine();
-            if(answer.equalsIgnoreCase("GUI"))
-            {
-                error = false;	//no errors, so we could leave this do loop if/when we return.
-                launchGUI();	//launch our GUI-driven command loop
-            }else if(answer.equalsIgnoreCase("TIO"))
-            {
-                error = false;	//no errors, so we could leave this do loop if/when we return.
-                launchTIO();	//launch our TIO-driven command loop
-            }else
-            {
-                error = true;	//Error: Not correct format
-                System.out.println("I couldn't understand your answer. Please enter again \n");
-            }
-        }while (error == true);	//loop on "Would you like to enter GUI or TIO?" until we get a good answer
-
+        initInterface();	//initialise all our variables we'll need to start
+        launchTIO();	//launch our TIO-driven command loop
 	}
 
 	//init our variables, which is mainly just calling initialising constructors of our classes
@@ -129,7 +104,7 @@ public class Interface {
 
 	                //santise
 	                try{
-	                	convertedAnswer = Integer.parseInt(answer)
+	                	convertedAnswer = Integer.parseInt(answer);
 	                	error = false;
 	                }catch(NumberFormatException ex)
 	                {
@@ -217,7 +192,7 @@ public class Interface {
     }
     
     //a method show help text
-    private void listSpecificPlaylist()
+    private void listMoviesInSpecificPlaylist()
     {
         
     }
@@ -259,7 +234,7 @@ public class Interface {
     }
     
      //a method show help text
-    private void listMoviesUnderSpecificMinutes()
+    private void listMoviesUnderSpecificRuntime()
     {
         
     }
@@ -268,6 +243,14 @@ public class Interface {
     private void editMovie()
     {
         
+    }
+    
+    //a method show help text
+    private void exit()
+    {
+        exit = true;
+		System.out.println("|");
+		System.out.print("|>> Exiting"); customWait(330); System.out.print("."); customWait(330); System.out.print("."); customWait(330); System.out.print(".");
     }
     
 
