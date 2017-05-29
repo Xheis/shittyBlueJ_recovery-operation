@@ -44,6 +44,7 @@ public class MovieDatabase
       {
         returnArray[i] = array1[i];
       }
+      returnArray[array1.length] = new Movie(); 
       return(returnArray);
     }
 

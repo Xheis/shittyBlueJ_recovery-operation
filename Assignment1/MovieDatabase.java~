@@ -44,6 +44,7 @@ public class MovieDatabase
       {
         returnArray[i] = array1[i];
       }
+      returnArray[] 
       return(returnArray);
     }
 
@@ -108,7 +109,7 @@ public class MovieDatabase
     
     public int getMovieNumber(String movieName)
    {
-     for (int i = 0; i < getLogicalSize()-1; i++)
+     for (int i = 0; i < getLogicalSize(); i++)
      {
          if (getMovie(i).getName().equalsIgnoreCase(movieName))
          {
