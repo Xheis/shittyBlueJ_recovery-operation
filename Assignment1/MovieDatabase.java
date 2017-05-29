@@ -35,13 +35,23 @@ public class MovieDatabase
         movie4 = new Movie();
     }
     
+    
+    private chrisCopy2implimentation(Movie array1[],Movie array2[])
+    {
+
+
+      
+    }
+
+
     //Methods for getting/setting our private movies in the MovieDatabase
     //------------------------------------------------------------------------------------------
-   public void setMovie(Movie newMovie,int movieNumber)
+   public void setMovie(Movie newMovie);//,int movieNumber)
    {
        //catch non-ints
        
-       switch  (movieNumber)
+
+       /*switch  (movieNumber)
        {
           case 0:
                 movie1 = newMovie;
@@ -76,7 +86,7 @@ public class MovieDatabase
                 //error
                 //msgbox error!
                 break;
-       }
+       } */
     }   
     
    public Movie getMovie(int movieNumber)
@@ -99,7 +109,7 @@ public class MovieDatabase
                 //we're bastardising this for use in some sanitity checks in Interface.js line 298. Expect this to change when we can do better checks with arrays.
                 break;
        }
-       // IF we have made it to this park of the code, we're in trouble. We've been unable to return the requested movie, so we'll send a sentinal indicator back (i.e. our sentinalMovieValue)
+       // IF we have made it to this part of the code, we're in trouble. We've been unable to return the requested movie, so we'll send a sentinal indicator back (i.e. our sentinalMovieValue)
        Movie sentinalMovieValue;
        sentinalMovieValue = new Movie();
        sentinalMovieValue.setName("Movie Not Found!");

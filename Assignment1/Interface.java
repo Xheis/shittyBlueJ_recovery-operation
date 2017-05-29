@@ -213,8 +213,8 @@ public class Interface {
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-            System.out.println("|> movieCount:" + movieCount);
-        database.setMovie(tempMovie,movieCount);
+            //System.out.println("|> movieCount:" + movieCount);
+        database.setMovie(tempMovie);//,movieCount);
         //null everything, I think we could have a unforseen issues otherwise.
         tempName = "";
         tempDirector = "";
