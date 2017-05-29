@@ -24,7 +24,7 @@ public class MovieDatabase
     public MovieDatabase()
     {
         
-        movieArray = new Movie[logicalSize+1]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
+        movieArray = new Movie[logicalSize]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
         movieArray[0] = new Movie();  //better set up the new one, incase we try to read.
     } 
     
@@ -108,7 +108,7 @@ public class MovieDatabase
     
     public int getMovieNumber(String movieName)
    {
-     for (int i = 0; i < getLogicalSize(); i++)
+     for (int i = 0; i < getLogicalSize()-1; i++)
      {
          if (getMovie(i).getName().equalsIgnoreCase(movieName))
          {
@@ -180,6 +180,6 @@ public class MovieDatabase
                         */
            }
        
-    }
+}
 
 

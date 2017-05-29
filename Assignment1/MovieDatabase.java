@@ -24,7 +24,7 @@ public class MovieDatabase
     public MovieDatabase()
     {
         
-        movieArray = new Movie[logicalSize+1]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
+        movieArray = new Movie[logicalSize]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
         movieArray[0] = new Movie();  //better set up the new one, incase we try to read.
     } 
     
