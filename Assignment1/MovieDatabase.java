@@ -15,7 +15,7 @@ public class MovieDatabase
   private Movie movieArray[];
     
   //this value will be used in lieu of a future dynamic array
-  private static int logicalSize = 1; //previously called MovieCount 28/05/17
+  private int logicalSize = 1; //previously called MovieCount 28/05/17  //was static
     
 
     /*
@@ -23,7 +23,6 @@ public class MovieDatabase
     */
     public MovieDatabase()
     {
-        
         movieArray = new Movie[logicalSize]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
         movieArray[0] = new Movie();  //better set up the new one, incase we try to read.
     } 
@@ -37,17 +36,25 @@ public class MovieDatabase
 
     
     //chrisCopy2implimentation from Lecture 9
-    private Movie[] chrisCopy2implimentation(Movie array1[], Movie newMovie)
+    private void chrisCopy2implimentation(Movie array1[], Movie array2[], Movie newMovie)
     {
-      Movie[] returnArray = new Movie[array1.length+1];
+      //Movie[] returnArray = new Movie[array1.length+1];
       for(int i=0; i< array1.length; i++)
       {
-        returnArray[i] = array1[i];
+        array2[i] = array1[i];
       }
-      returnArray[array1.length] = new Movie(); 
-      return(returnArray);
+      array2[array1.length] = new Movie(); 
+      //return(returnArray);
     }
 
+    //chrisCopy2implimentation from Lecture 9
+    private void chrisCopy2(Movie array1[],Movie array2[])
+    {
+      for(int i=0; i< array1.length; i++)
+      {
+        array2[i] = array1[i];
+      }
+    }
 
 
 
@@ -56,7 +63,10 @@ public class MovieDatabase
    public void setMovie(Movie newMovie)//,int movieNumber)
    {
       //adds to array
-      movieArray = chrisCopy2implimentation(movieArray,newMovie);
+      Movie tempMovies[] = new Movie[logicalSize+1];
+      //tempMovies = chrisCopy2implimentation(movieArray,newMovie);
+      chrisCopy2implimentation(movieArray,tempMovies,newMovie);
+      //movieArray = tempMovies;
       String tempstring = movieArray[logicalSize].getName();
       logicalSize++;
     }   
