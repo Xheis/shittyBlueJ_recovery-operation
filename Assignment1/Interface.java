@@ -14,11 +14,10 @@ public class Interface {
      * Private Varaibles for encapsulation
      */
     
-    private Playlist playlist1,playlist2;   //2 playlists are delcared in interface as required. Would replace with playlistArray[] as needed
+    private Playlist playlistArray[];   //2 playlists are delcared in interface as required. Would replace with playlistArray[] as needed
     private MovieDatabase database;         //A single movie database is used
     private boolean exit;                   //exit is used to to exit our program's input while loop
-    private int movieCount;                 //movieCount is a int used to count the number of movies we have
-    private int playlistCount;              //playlistCount is a int used to count the number of playlists we have
+    private int logicalSize = 2;              //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
     
     private Scanner console = new Scanner(System.in);   //the console will mainly be used
 
@@ -40,13 +39,12 @@ public class Interface {
         launchTIO();    //launch our TIO-driven command loop
     }
 
-    //init our variables, which is mainly just calling initialising constructors of our classes
-    private void initInterface()
+    //init our variables, which is mainly just calling initialising constructors of our classes. Could be a constructor, but I'll leave it as is.
+    //private void initInterface()
+    public Interface()
     {
-       playlist1 = new Playlist();
-       playlist2 = new Playlist();
+       playlistArray = new Playlist[playlistArray];
        database = new MovieDatabase();
-       movieCount = 0;  //tells us we have 0 movies at the present.
     }
 
     //this method will run our user interface via TIO
@@ -214,8 +212,7 @@ public class Interface {
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-            //System.out.println("|> movieCount:" + movieCount);
-        database.setMovie(tempMovie);//,movieCount);
+        database.setMovie(tempMovie);
         //null everything, I think we could have a unforseen issues otherwise.
         tempName = "";
         tempDirector = "";
@@ -223,7 +220,6 @@ public class Interface {
         tempDuration = -2;
         tempMovie = new Movie();
 
-        movieCount++; //we're 0 indexed for our movies 0-3. 
 
         System.out.println("|");
         System.out.print("|>");
