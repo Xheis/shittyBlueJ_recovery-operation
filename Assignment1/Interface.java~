@@ -247,10 +247,14 @@ public class Interface {
 
         Playlist tempPlaylist = new Playlist(tempName);
         //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
-        System.out.println("|>> Enter Name of new Playlist");
+        System.out.println("|>> To select movies, simply type in their number. When you are done, type in -1");
         do
         {
             intAnswer = showNumberedMovies();
+            if(intAnswer==-1)
+            {
+                break;
+            }
             tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
     }while(intAnswer!=-1);
     
@@ -377,7 +381,7 @@ public class Interface {
         System.out.println("|>> Showing all Movies");
         System.out.println("|");
         //loop all playlists, show them numbered;
-        for (int i = 0; i < logicalSize; i++) 
+        for (int i = 0; i < database.getLogicalSize(); i++) 
         {
             if (i < 10) 
             {
@@ -399,6 +403,10 @@ public class Interface {
         intAnswer = console.nextInt();
         return(intAnswer);
     }
+    for (int i = 0; i < database.getLogicalSize(); i++) 
+        {
+            System.out.println("|> " + database.getMovie(i).getName());
+        }
 
      //a method show help text
     private void editPlaylist()

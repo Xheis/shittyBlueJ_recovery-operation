@@ -251,6 +251,10 @@ public class Interface {
         do
         {
             intAnswer = showNumberedMovies();
+            if(intAnswer==-1)
+            {
+                break;
+            }
             tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
     }while(intAnswer!=-1);
     
@@ -377,7 +381,7 @@ public class Interface {
         System.out.println("|>> Showing all Movies");
         System.out.println("|");
         //loop all playlists, show them numbered;
-        for (int i = 0; i < logicalSize; i++) 
+        for (int i = 0; i < database.getLogicalSize(); i++) 
         {
             if (i < 10) 
             {
@@ -399,6 +403,7 @@ public class Interface {
         intAnswer = console.nextInt();
         return(intAnswer);
     }
+
 
      //a method show help text
     private void editPlaylist()
