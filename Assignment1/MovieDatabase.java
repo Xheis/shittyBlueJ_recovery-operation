@@ -44,7 +44,7 @@ public class MovieDatabase
       for(int i=0; i< array1.length; i++)
       {
         array2[i] = array1[i];
-        debugPrint("Loop count: " + Integer.toString(i) + " Name:" + array2[i].getName());
+        debugPrint("Loop count: " + Integer.toString(i) + " Name:" + array2[i].getName()+ " Name2:" + array1[i].getName());
       }
       array2[array1.length] = newMovie;
       debugPrint("Loop count END Name:" + array2[array1.length].getName());

@@ -90,7 +90,6 @@ public class Interface {
         System.out.println("|> 15 - Edit Playlist");
         System.out.println("|> 16 - Exit");
         System.out.print("|> ");
-        console.nextLine(); //consumes any left offer buffer
     }
 
     
@@ -253,7 +252,7 @@ public class Interface {
         System.out.println("|");
         System.out.print("|> ");
         //tempFileSize = console.nextInt();
-        while (sanatiseNextInt(tempFileSize))   //will repeat input until a valid input is taken
+        while (sanatiseNextInt(tempFileSize));   //will repeat input until a valid input is taken
 
         //enter Duration
         System.out.println("|>> Enter Duration of Movie (e.g. 144.2 for 144.2 minutes))");
@@ -262,8 +261,8 @@ public class Interface {
         //tempDuration = console.nextFloat();
         while (sanatiseNextFloat(tempDuration))   //will repeat input until a valid input is taken
 
-        tempMovie.setName(tempName);
-        tempMovie.setDirector(tempDirector);
+        tempMovie.setName(tempDirector);
+        tempMovie.setDirector(tempName);
         tempMovie.setFileSize(tempFileSize[0]);
         tempMovie.setDuration(tempDuration[0]);
 
@@ -274,11 +273,11 @@ public class Interface {
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-        database.addMovie(tempMovie);
-        Movie.numberOfMovies++; //static as requested.
+            database.addMovie(tempMovie);
+            Movie.numberOfMovies++; //static as requested.
 
-        System.out.println("|");
-        System.out.print("|>");
+            System.out.println("|");
+            System.out.print("|>");
         }
         else
         {
@@ -671,7 +670,7 @@ public class Interface {
     
     private int showNumberedMovies()
     {
-        int intAnswer = -1;
+        int intAnswer[] = {-1};
         System.out.println("|>> Showing all Movies");
         System.out.println("|");
         //loop all playlists, show them numbered;
