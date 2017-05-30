@@ -13,6 +13,7 @@ public class Movie
     private String director;
     private int fileSize;
     private float duration;
+    static int numberOfMovies;
     //private short ID; //Not used at the present
 
     /**
@@ -25,6 +26,15 @@ public class Movie
         director = "";
         fileSize = 0;
         duration = 0;
+    }
+
+    public Movie(String tempName, String tempDirector, int tempFileSize float tempDuration)
+    { 
+        // initialise instance variables
+        name = tempName;
+        director = tempDirector;
+        fileSize = tempFileSize;
+        duration = tempDuration;
     }
 
 
