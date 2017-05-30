@@ -137,12 +137,12 @@ public class MovieDatabase
    
   public String getMoviesAsString()
   {
-      String stringToPrint = "|\n";
+      String stringToPrint = "|";
       for (int i = 0; i < logicalSize; i++) 
       {
-        stringToPrint += "|> " + movieArray[i].getName() + "\n";
+        stringToPrint += "\n|> " + movieArray[i].getName();
       }
-      
+      stringToPrint += "\n|>";
       return stringToPrint;
   }
 
