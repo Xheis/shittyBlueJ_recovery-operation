@@ -568,7 +568,7 @@ public class Interface {
     {
         System.out.println("|>> Select a Movie to edit it");
          int selectedMovie;// = showNumberedMovies();
-
+         int editMovieOptions;
         //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
         //System.out.println("|>> To add a movie, simply type in their number. When you are done, type in -1");
         do
@@ -581,7 +581,7 @@ public class Interface {
             do
             {
                 Movie tempMovie = database.getMovie(selectedMovie);
-                int editMovieOptions = editMovieMenu();
+                editMovieOptions = editMovieMenu();
                 switch(editMovieOptions)
                 {
                     case 1:
@@ -626,7 +626,7 @@ public class Interface {
                 }
             }while(editMovieOptions!=5 && editMovieOptions!=-1);
             //playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(intAnswer));
-        }while(intAnswer!=-1);
+        }while(selectedMovie!=-1);
 
 
         System.out.println("|");
@@ -713,18 +713,19 @@ public class Interface {
 
          System.out.println("|>> Select a Playlist to edit it");
          int selectedPlaylist = showNumberedPlaylists();
+         int selectedMovie = -1;
          //tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
         
         //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
         System.out.println("|>> To add a movie, simply type in their number. When you are done, type in -1");
         do
         {
-            intAnswer = showNumberedMovies();
-            if(intAnswer==-1)
+            selectedMovie = showNumberedMovies();
+            if(selectedMovie==-1)
             {
                 break;
             }
-            if(playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(intAnswer)) == false)
+            if(playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(selectedMovie)) == false)
             {
                 //an error has occured! Notify user.
                 System.out.println("|> Playlist full! Please delete movies from this playlist if you'd like to add more. ");
@@ -732,7 +733,7 @@ public class Interface {
                 System.out.print("|> ");
 
             }
-        }while(intAnswer!=-1);
+        }while(selectedMovie!=-1);
 
 
         System.out.println("|");

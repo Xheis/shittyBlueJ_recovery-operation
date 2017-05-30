@@ -36,7 +36,7 @@ public class Playlist extends MovieDatabase
 
   public boolean addMovieToPlaylist(Movie newMovie)
   {
-    setMovie(newMovie);  //inherited from MovieDatabase
+ 
     if (isPlaylistFull(newMovie)) 
     {
         //too full
@@ -44,12 +44,13 @@ public class Playlist extends MovieDatabase
     }
     else
     {
+        setMovie(logicalSize,newMovie);  //inherited from MovieDatabase
         updatePlaylist();     //update playlist stats
         return(true);
     }
   }
 
-  private boolean isPlaylistFull(Movie newMovie); //initPlaylist()
+  private boolean isPlaylistFull(Movie newMovie) //initPlaylist()
     {
         //createTotalDuration();
         //createTotalSize();
@@ -68,7 +69,7 @@ public class Playlist extends MovieDatabase
 
     }
 
-    private void updatePlaylist(); //initPlaylist()
+    private void updatePlaylist() //initPlaylist()
     {
         createTotalDuration();
         createTotalSize();

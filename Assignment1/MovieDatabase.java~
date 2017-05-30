@@ -87,7 +87,7 @@ public class MovieDatabase
      return -1; //error code. -1 indicates an error e.g. movie not found.
    }  
     
-   
+ 
 
     //method to search our 4 movies by director name
     public String getMovieByDirector(String movieDirector)
@@ -143,7 +143,7 @@ public class MovieDatabase
   //method to delete
   public void deleteMovie(int selectedMovie) 
   {
-        int tempNameOfMovie = movieArray[selectedMovie].getName();
+        String tempNameOfMovie = movieArray[selectedMovie].getName();
         Movie tempMovieArray[] = new Playlist[logicalSize-1];
         for (int i = 0; i< tempMovieArray.length; i++) 
         {

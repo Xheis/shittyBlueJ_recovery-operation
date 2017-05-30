@@ -143,8 +143,8 @@ public class MovieDatabase
   //method to delete
   public void deleteMovie(int selectedMovie) 
   {
-        int tempNameOfMovie = movieArray[selectedMovie].getName();
-        Movie tempMovieArray[] = new Playlist[logicalSize-1];
+        String tempNameOfMovie = movieArray[selectedMovie].getName();
+        Movie tempMovieArray[] = new Movie[logicalSize-1];
         for (int i = 0; i< tempMovieArray.length; i++) 
         {
             //copy 1 to 1 until we get to selectedPlaylist, then copy 1+1 to 1
