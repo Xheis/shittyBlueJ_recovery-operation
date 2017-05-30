@@ -44,7 +44,7 @@ public class Playlist extends MovieDatabase
     }
     else
     {
-        setMovie(logicalSize,newMovie);  //inherited from MovieDatabase
+        addMovie(newMovie);//setMovie(logicalSize,newMovie);  //inherited from MovieDatabase
         updatePlaylist();     //update playlist stats
         return(true);
     }

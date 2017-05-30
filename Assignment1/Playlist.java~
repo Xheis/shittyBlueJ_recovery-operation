@@ -69,7 +69,7 @@ public class Playlist extends MovieDatabase
 
     }
 
-    private void updatePlaylist(); //initPlaylist()
+    private void updatePlaylist() //initPlaylist()
     {
         createTotalDuration();
         createTotalSize();
