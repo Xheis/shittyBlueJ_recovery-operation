@@ -676,7 +676,7 @@ public class Interface {
 			System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize-1));
 			System.out.print("|> ");
         	error = sanatiseNextInt(intAnswer);
-        }while(error || (intAnswer[0] > database.getLogicalSize()));//intAnswer = console.nextInt();
+        }while(error || (intAnswer[0] > (logicalSize -1)));//intAnswer = console.nextInt();
 
         return(intAnswer[0]);
     }
@@ -711,7 +711,7 @@ public class Interface {
 			System.out.println("|> Please choose a movie between 0 - " + Integer.toString(database.getLogicalSize()-1));
 			System.out.print("|> ");
         	error = sanatiseNextInt(intAnswer);
-        }while(error || (intAnswer[0] > database.getLogicalSize()));//intAnswer = console.nextInt();
+        }while(error || (intAnswer[0] > (database.getLogicalSize()-1)));//intAnswer = console.nextInt();
         return(intAnswer[0]);
     }
 
