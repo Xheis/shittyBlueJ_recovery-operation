@@ -7,8 +7,9 @@
 
 import java.util.*;
 import java.text.*;
-import java.io.PrintWriter;          
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;          
 
 public class Interface {
     
@@ -547,13 +548,14 @@ public class Interface {
      //a method show help text
     private void listMoviesUnderSpecificRuntime()
     {
-        float tempRuntime,stringToPrint;
+        float tempRuntime;
+        String stringToPrint ="";
         //enter Director    
         System.out.println("|>> Enter Runtime in Minutes (float)");
         System.out.println("|");
         System.out.print("|> ");    
-        tempRuntime = console.nextFloat();
-       
+        
+        while (sanatiseNextFloat(tempRuntime));   //will repeat input until a valid input is taken
 
         stringToPrint = database.getMovieByRuntime(tempRuntime);
         System.out.println(stringToPrint); 
@@ -578,7 +580,7 @@ public class Interface {
             }
             do
             {
-                int tempMovie = database.getMovie(selectedMovie);
+                Movie tempMovie = database.getMovie(selectedMovie);
                 int editMovieOptions = editMovieMenu();
                 switch(editMovieOptions)
                 {
@@ -606,7 +608,7 @@ public class Interface {
                         System.out.println("|>> Enter a new FileSize:");
                         System.out.print("|> ");
                         tempFileSize = console.nextInt();
-                        tempMovie.setDirector(tempFileSize);
+                        tempMovie.setFileSize(tempFileSize);
                         database.setMovie(selectedMovie,tempMovie);
                     }
                     case 4:
@@ -615,7 +617,7 @@ public class Interface {
                         System.out.println("|>> Enter a new Duration:");
                         System.out.print("|> ");
                         tempDuration = console.nextFloat();
-                        tempMovie.setDirector(tempDuration);
+                        tempMovie.setDuration(tempDuration);
                         database.setMovie(selectedMovie,tempMovie);
                     }
                     case 5:

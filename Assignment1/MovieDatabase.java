@@ -87,6 +87,7 @@ public class MovieDatabase
      return -1; //error code. -1 indicates an error e.g. movie not found.
    }  
     
+ 
 
     //method to search our 4 movies by director name
     public String getMovieByDirector(String movieDirector)
@@ -112,15 +113,15 @@ public class MovieDatabase
        return stringToPrint;
    }
  //method to search our 4 movies by director name
-    public String getMovieByRuntime(int tempRuntime)
+    public String getMovieByRuntime(float tempRuntime)
    {
-    int stringToPrint = "";
+    String stringToPrint = "";
        for (int i = 0; i < getLogicalSize(); i++) 
        {
 
             if (movieArray[i].getDuration() <= tempRuntime)
             {
-                stringToPrint += "|> " + movieArray[i].getName() +  " - " + Float.toString(movieArray[i].getDuration) + "\n";
+                stringToPrint += "|> " + movieArray[i].getName() +  " - " + Float.toString(movieArray[i].getDuration()) + "\n";
             }
 
         }

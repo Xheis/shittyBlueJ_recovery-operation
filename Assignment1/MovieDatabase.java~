@@ -12,8 +12,8 @@ public class MovieDatabase
 {
    //define our 4 movies
     //private Movie movie1,movie2,movie3,movie4;
-  protected Movie movieArray[];
-  private int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
+  protected Movie movieArray[]; //called allMovies in the assignment sheet.
+  protected int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
 
     /*
     * Constructor for objects of class Playlist
@@ -52,7 +52,7 @@ public class MovieDatabase
 
     //Methods for getting/setting our private movies in the MovieDatabase
     //------------------------------------------------------------------------------------------
-   public void setMovie(Movie newMovie)//,int movieNumber)
+   public void addMovie(Movie newMovie)//,int movieNumber)
    {
       //adds to array
       Movie tempMovies[] = new Movie[logicalSize+1];
@@ -70,6 +70,10 @@ public class MovieDatabase
       return movieArray[movieNumber];
    }
 
+   public void setMovie(int index, Movie tempMovie)
+   {
+      movieArray[index] = tempMovie;
+   }
     
     public int getMovieNumber(String movieName)
    {
@@ -83,6 +87,7 @@ public class MovieDatabase
      return -1; //error code. -1 indicates an error e.g. movie not found.
    }  
     
+   
 
     //method to search our 4 movies by director name
     public String getMovieByDirector(String movieDirector)
@@ -107,6 +112,22 @@ public class MovieDatabase
            }
        return stringToPrint;
    }
+ //method to search our 4 movies by director name
+    public String getMovieByRuntime(float tempRuntime)
+   {
+    String stringToPrint = "";
+       for (int i = 0; i < getLogicalSize(); i++) 
+       {
+
+            if (movieArray[i].getDuration() <= tempRuntime)
+            {
+                stringToPrint += "|> " + movieArray[i].getName() +  " - " + Float.toString(movieArray[i].getDuration()) + "\n";
+            }
+
+        }
+      return stringToPrint;
+   }
+
    
   public String getMoviesAsString()
   {
@@ -120,10 +141,30 @@ public class MovieDatabase
   }
 
   //method to delete
-  public void deleteMovie(int index) 
+  public void deleteMovie(int selectedMovie) 
   {
-         
-         
+        int tempNameOfMovie = movieArray[selectedMovie].getName();
+        Movie tempMovieArray[] = new Playlist[logicalSize-1];
+        for (int i = 0; i< tempMovieArray.length; i++) 
+        {
+            //copy 1 to 1 until we get to selectedPlaylist, then copy 1+1 to 1
+            if (i < selectedMovie) 
+            {
+                tempMovieArray[i] = movieArray[i];
+            }
+            else if (i == selectedMovie)
+            {
+                //Do nothing, but I'm leaving this nested if to indicate we're deliberatelty doing nothing
+            }   
+            else if (i > selectedMovie)
+            {
+                tempMovieArray[i] = movieArray[i+1];
+            }
+        }
+        tempMovieArray = movieArray;
+        System.out.println("|> " + tempNameOfMovie + " deleted."); 
+        System.out.println("|");
+        System.out.print("|> ");          
   }
        
 }
