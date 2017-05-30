@@ -653,6 +653,7 @@ public class Interface {
     private int showNumberedPlaylists()
     {
         int intAnswer[] = {-1};
+        boolean error = false;
         System.out.println("|>> Showing all Playlists");
         System.out.println("|");
         //loop all playlists, show them numbered;
@@ -672,9 +673,9 @@ public class Interface {
         {
 			//ask user to add by number
 			System.out.println("| ");
-			System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize));
+			System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize-1));
 			System.out.print("|> ");
-        	boolean error = sanatiseNextInt(intAnswer)
+        	error = sanatiseNextInt(intAnswer);
         }while(error || (intAnswer[0] > database.getLogicalSize()));//intAnswer = console.nextInt();
 
         return(intAnswer[0]);
@@ -683,6 +684,7 @@ public class Interface {
     private int showNumberedMovies()
     {
         int intAnswer[] = {-1};
+        boolean error = false;
         System.out.println("|>> Showing all Movies");
         System.out.println("|");
         //loop all playlists, show them numbered;
@@ -706,9 +708,9 @@ public class Interface {
         {
 			//ask user to add by number
 			System.out.println("| ");
-			System.out.println("|> Please choose a movie between 0 - " + Integer.toString(database.getLogicalSize()));
+			System.out.println("|> Please choose a movie between 0 - " + Integer.toString(database.getLogicalSize()-1));
 			System.out.print("|> ");
-        	boolean error = sanatiseNextInt(intAnswer)
+        	error = sanatiseNextInt(intAnswer);
         }while(error || (intAnswer[0] > database.getLogicalSize()));//intAnswer = console.nextInt();
         return(intAnswer[0]);
     }

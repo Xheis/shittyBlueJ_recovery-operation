@@ -67,7 +67,7 @@ public class MovieDatabase
     
    public Movie getMovie(int movieNumber)
    {
-      if (movieNumber > logicalSize)
+      if (movieNumber > logicalSize -1)
       {
         //error! Not possible
         Movie debug = new Movie(true);
