@@ -261,8 +261,8 @@ public class Interface {
         //tempDuration = console.nextFloat();
         while (sanatiseNextFloat(tempDuration));   //will repeat input until a valid input is taken
 
-        tempMovie.setName(tempDirector);
-        tempMovie.setDirector(tempName);
+        tempMovie.setName(tempName);
+        tempMovie.setDirector(tempDirector);
         tempMovie.setFileSize(tempFileSize[0]);
         tempMovie.setDuration(tempDuration[0]);
 
