@@ -67,7 +67,16 @@ public class MovieDatabase
     
    public Movie getMovie(int movieNumber)
    {
-      return movieArray[movieNumber];
+      if (movieNumber > logicalSize)
+      {
+        //error! Not possible
+        Movie debug = new Movie(true);
+        return debug;
+      }
+      else
+      {
+        return movieArray[movieNumber];
+      }
    }
 
    public void setMovie(int index, Movie tempMovie)

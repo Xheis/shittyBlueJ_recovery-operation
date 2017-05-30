@@ -308,7 +308,15 @@ public class Interface {
             {
                 break;
             }
-            tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
+            else if (intAnswer > database.getLogicalSize())
+            {
+            	//wrong choice
+
+            }
+            else
+        	{
+        		tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
+        	}
     }while(intAnswer!=-1);
     
         addNewPlaylist(tempPlaylist);
@@ -659,12 +667,16 @@ public class Interface {
                 System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[i].getPlaylistName());   
             }
         }
-        //ask user to add by number
-        System.out.println("| ");
-        System.out.println("|> Please choose a playlist");
-        System.out.print("|> ");
-        while(sanatiseNextInt(intAnswer));
-        //intAnswer = console.nextInt();
+
+        do
+        {
+			//ask user to add by number
+			System.out.println("| ");
+			System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize));
+			System.out.print("|> ");
+        	boolean error = sanatiseNextInt(intAnswer)
+        }while(error || (intAnswer[0] > database.getLogicalSize()));//intAnswer = console.nextInt();
+
         return(intAnswer[0]);
     }
     
@@ -689,11 +701,15 @@ public class Interface {
                 System.out.println("|> " + Integer.toString(i) + " - " + database.getMovie(i).getName());   
             }
         }
-        //ask user to add by number
-        System.out.println("| ");
-        System.out.println("|> Please choose a movie");
-        System.out.print("|> ");
-        while(sanatiseNextInt(intAnswer));//intAnswer = console.nextInt();
+
+        do
+        {
+			//ask user to add by number
+			System.out.println("| ");
+			System.out.println("|> Please choose a movie between 0 - " + Integer.toString(database.getLogicalSize()));
+			System.out.print("|> ");
+        	boolean error = sanatiseNextInt(intAnswer)
+        }while(error || (intAnswer[0] > database.getLogicalSize()));//intAnswer = console.nextInt();
         return(intAnswer[0]);
     }
 

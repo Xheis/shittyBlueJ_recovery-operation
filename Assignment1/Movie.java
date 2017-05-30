@@ -14,6 +14,7 @@ public class Movie
     private int fileSize;
     private float duration;
     static int numberOfMovies;
+    private boolean errorOccured;
     //private short ID; //Not used at the present
 
     /**
@@ -27,7 +28,11 @@ public class Movie
         fileSize = 0;
         duration = 0;
     }
-
+    public Movie(boolean didAnErrorOccur)
+    {
+        //yes.
+        errorOccured = true;
+    }
     public Movie(String tempName, String tempDirector, int tempFileSize, float tempDuration)
     { 
         // initialise instance variables
