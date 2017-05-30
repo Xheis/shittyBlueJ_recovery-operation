@@ -140,7 +140,7 @@ public class Interface {
     {
         //Take user input by looping through the uglest nested if-else tree you can imagine. I wanted to do the program like this, but I didn't work out how to make a proper command line parser. 
                     //String answer;          //Answer as a string
-                    int menuOption;//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
+                    int menuOption = 0;//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
                     //boolean error;  //answer error flag
                     //error = false;
 
@@ -226,7 +226,7 @@ public class Interface {
     {
         //variables we'll fill, and use to create a new instance of a movie
         String tempName,tempDirector;
-        int tempFileSize;
+        int tempFileSize = 0;
         float tempDuration;
 
         //set up a temp. movie variable, for us to pass to the database to store.
@@ -548,7 +548,7 @@ public class Interface {
      //a method show help text
     private void listMoviesUnderSpecificRuntime()
     {
-        float tempRuntime;
+        float tempRuntime = 0;
         String stringToPrint ="";
         //enter Director    
         System.out.println("|>> Enter Runtime in Minutes (float)");
@@ -713,7 +713,7 @@ public class Interface {
 
          System.out.println("|>> Select a Playlist to edit it");
          int selectedPlaylist = showNumberedPlaylists();
-         int selectedMovie = 0;
+         int selectedMovie = -1;
          //tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
         
         //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray

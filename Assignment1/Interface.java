@@ -140,7 +140,7 @@ public class Interface {
     {
         //Take user input by looping through the uglest nested if-else tree you can imagine. I wanted to do the program like this, but I didn't work out how to make a proper command line parser. 
                     //String answer;          //Answer as a string
-                    int menuOption;//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
+                    int menuOption = 0;//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
                     //boolean error;  //answer error flag
                     //error = false;
 
@@ -226,8 +226,8 @@ public class Interface {
     {
         //variables we'll fill, and use to create a new instance of a movie
         String tempName,tempDirector;
-        int tempFileSize;
-        float tempDuration;
+        int tempFileSize = 0;
+        float tempDuration = 0;
 
         //set up a temp. movie variable, for us to pass to the database to store.
         Movie tempMovie;
@@ -548,7 +548,7 @@ public class Interface {
      //a method show help text
     private void listMoviesUnderSpecificRuntime()
     {
-        float tempRuntime;
+        float tempRuntime = 0;
         String stringToPrint ="";
         //enter Director    
         System.out.println("|>> Enter Runtime in Minutes (float)");
