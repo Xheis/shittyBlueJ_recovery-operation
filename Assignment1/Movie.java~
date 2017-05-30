@@ -13,7 +13,8 @@ public class Movie
     private String director;
     private int fileSize;
     private float duration;
-    //private short ID;
+    static int numberOfMovies;
+    //private short ID; //Not used at the present
 
     /**
      * Constructor for objects of class Movie
@@ -27,11 +28,21 @@ public class Movie
         duration = 0;
     }
 
+    public Movie(String tempName, String tempDirector, int tempFileSize float tempDuration)
+    { 
+        // initialise instance variables
+        name = tempName;
+        director = tempDirector;
+        fileSize = tempFileSize;
+        duration = tempDuration;
+    }
 
-    
+
+    //GetSet Methods 
+    //-----------------------------------------------------------------------------
     public String getName()
     {
-        // put your code here
+
         return name;
     }
     public void setName(String newName)
@@ -41,7 +52,7 @@ public class Movie
     
     public String getDirector()
     {
-        // put your code here
+        
         return director;
     }
     public void setDirector(String newDirector)
@@ -51,7 +62,7 @@ public class Movie
     
     public int getFileSize()
     {
-        // put your code here
+        
         return fileSize;
     }
     public void setFileSize(int newFileSize)
@@ -61,11 +72,12 @@ public class Movie
         
     public float getDuration()
     {
-        // put your code here
+        
         return duration;
     }
     public void setDuration(float newDuration)
     {
         duration = newDuration;
     }
+    //-----------------------------------------------------------------------------
 }

@@ -7,6 +7,8 @@
 
 import java.util.*;
 import java.text.*;
+import java.io.PrintWriter;          
+import java.io.FileNotFoundException;
 
 public class Interface {
     
@@ -14,13 +16,14 @@ public class Interface {
      * Private Varaibles for encapsulation
      */
     
-    private Playlist playlistArray[];   //2 playlists are delcared in interface as required. Would replace with playlistArray[] as needed
+    private Playlist playlistArray[];   //called playlists[] in the assignment sheet. Seems ambigious to have "allMovies" and "playlists", why not "allPlaylists"? I prefered this name.
     private MovieDatabase database;         //A single movie database is used
     private boolean exit;                   //exit is used to to exit our program's input while loop
     private int logicalSize = 0;              //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
     
     private Scanner console = new Scanner(System.in);   //the console will mainly be used
 
+    private String databasePath = "";
 
     //our main hook for use to start the program.
     public static void main(String[] args)
@@ -51,7 +54,7 @@ public class Interface {
     private void launchTIO()
     {
         System.out.println("|-----------------------------------------------------------");
-        System.out.println("|------------------   Movie Assignment 1  ------------------");
+        System.out.println("|------------------   Movie Assignment 2  ------------------");
         System.out.println("|-----------------------------------------------------------");
         System.out.println("|> Type the following commands to");
         System.out.println("|> navigate the program:");
@@ -83,25 +86,74 @@ public class Interface {
         System.out.println("|> 12 - Open Movie Database");
         System.out.println("|> 13 - List Movies Under Specific Runtime");
         System.out.println("|> 14 - Edit Movie");
-        System.out.println("|> 15 - Exit");
+        System.out.println("|> 15 - Edit Playlist");
+        System.out.println("|> 16 - Exit");
         System.out.print("|> ");
     }
+
+    private boolean sanatiseNextInt(int convertedAnswer)
+    {
+        String answer = console.nextLine();
+        boolean error = false;
+
+            //santise
+            try{
+                convertedAnswer = Integer.parseInt(answer);
+                error = false;
+                
+            }catch(NumberFormatException ex)
+            {
+                //Error: Not correct format
+                System.out.println("|>> I couldn't understand your answer. Please enter again \n");
+                System.out.println("|");
+                System.out.print("|> ");
+                error = true;
+            }
+
+            return(error);
+    }
+
+    private boolean sanatiseNextFloat(float convertedAnswer)
+    {
+        String answer = console.nextLine();
+        boolean error = false;
+
+            //santise
+            try{
+                convertedAnswer = Float.parseFloat(answer);
+                error = false;
+            }catch(NumberFormatException ex)
+            {
+                //Error: Not correct format
+                System.out.println("|>> I couldn't understand your answer. Please enter again \n");
+                System.out.println("|");
+                System.out.print("|> ");
+                error = true;
+            }
+            
+            return(error);
+    }
+
 
     private void processUserInput()
     {
         //Take user input by looping through the uglest nested if-else tree you can imagine. I wanted to do the program like this, but I didn't work out how to make a proper command line parser. 
-                    String answer;          //Answer as a string
-                    int convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
-                    boolean error;  //answer error flag
-                    error = false;
+                    //String answer;          //Answer as a string
+                    int menuOption;//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
+                    //boolean error;  //answer error flag
+                    //error = false;
 
         //start by grabbing a command and checking it
-        do 
-        {                           //get the right answer
-                    answer = console.nextLine();
-
+       // do 
+        //{                           //get the right answer
+                    //answer = console.nextLine();
+                    //if (sanatiseNextInt(menuOption))
+                    //{
+                    //    continue; //an error has occured, skip this loop iteration and start again.
+                    //}
+                    while(sanatiseNextInt(menuOption));
                     //santise
-                    try{
+                    /*try{
                         convertedAnswer = Integer.parseInt(answer);
                         error = false;
                     }catch(NumberFormatException ex)
@@ -113,9 +165,9 @@ public class Interface {
                         System.out.print("|> ");
                         error = true;
                         continue; //skips this do loop operation
-                    }
+                    } */
 
-                    switch(convertedAnswer)
+                    switch(menuOption)
                     {
                         case 1: help();break; 
 
@@ -152,12 +204,12 @@ public class Interface {
                         default: 
                             //Error: Not recognised command
                             System.out.println("|");
-                                System.out.println("|>> Not a recognised command. Please enter again \n");
+                            System.out.println("|>> Not a recognised command. Please enter again");
                             System.out.println("|");
                             System.out.print("|> ");
-                            error = true;
+                            //error = true;
                     }
-        }while (error == true);
+        //}while (error == true);
     }
 
  //a method show help text
@@ -168,12 +220,14 @@ public class Interface {
     }
     
 
-    //a method show help text
+    //a method we call to create a new movie
     private void newMovie()
     {
+        //variables we'll fill, and use to create a new instance of a movie
         String tempName,tempDirector;
         int tempFileSize;
         float tempDuration;
+
         //set up a temp. movie variable, for us to pass to the database to store.
         Movie tempMovie;
         tempMovie = new Movie();
@@ -183,6 +237,7 @@ public class Interface {
         System.out.println("|");
         System.out.print("|> ");
         tempName = console.nextLine();
+        //TO DO: Add 
 
         //enter Director    
         System.out.println("|>> Enter Name of Director");
@@ -194,13 +249,15 @@ public class Interface {
         System.out.println("|>> Enter FileSize of Movie (e.g. 512 for 512mb)");
         System.out.println("|");
         System.out.print("|> ");
-        tempFileSize = console.nextInt();
+        //tempFileSize = console.nextInt();
+        while (sanatiseNextInt(tempFileSize))   //will repeat input until a valid input is taken
 
         //enter Duration
         System.out.println("|>> Enter Duration of Movie (e.g. 144.2 for 144.2 minutes))");
         System.out.println("|");
         System.out.print("|> ");
-        tempDuration = console.nextFloat();
+        //tempDuration = console.nextFloat();
+        while (sanatiseNextFloat(tempDuration))   //will repeat input until a valid input is taken
 
         tempMovie.setName(tempName);
         tempMovie.setDirector(tempDirector);
@@ -210,11 +267,13 @@ public class Interface {
         if (database.getMovieNumber(tempName) == -1) //time to check if we have a duplicate movie by name: (Note: An assumption is made that all other meta data could theoretically be the same as a different, unique movie. We also butcher our "getMovieNumber()" method to check)
         {
             System.out.println("|>> New Movie Made!");
-            System.out.println("|> Name: " + tempMovie.getName());
+            System.out.println("|> Movie title: " + tempMovie.getName());
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-        database.setMovie(tempMovie);
+        database.addMovie(tempMovie);
+        Movie.numberOfMovies++; //static as requested.
+
         //null everything, I think we could have a unforseen issues otherwise.
         tempName = "";
         tempDirector = "";
@@ -305,49 +364,287 @@ public class Interface {
     //a method show help text
     private void listByMovieDirector()
     {
-        
+        String tempDirector, stringToPrint;
+        //enter Director    
+        System.out.println("|>> Enter Name of Director");
+        System.out.println("|");
+        System.out.print("|> ");    
+        tempDirector = console.nextLine();
+
+        stringToPrint = database.getMovieByDirector(tempDirector);
+        System.out.println(stringToPrint); 
+        System.out.println("| "); 
+        System.out.print("|> "); 
     }
     
     //a method show help text
     private void deleteFromPlaylist()
     {
-        
+         String tempDirector;
+        //enter Director    
+        System.out.println("|>> Enter Name of Director");
+        System.out.println("|");
+        System.out.print("|> ");    
+        tempDirector = console.nextLine();
+
+        //database.getMovieByDirector(director)
     }
     
     //a method show help text
     private void deletePlaylist()
     {
-        
+        System.out.println("|>> Select a Playlist to delete it");
+        int selectedPlaylist = showNumberedPlaylists();
+        String tempNameOfPlaylist = playlistArray[selectedPlaylist].getPlaylistName();
+        Playlist tempPlaylistArray[] = new Playlist[logicalSize-1];
+        for (int i = 0; i< tempPlaylistArray.length; i++) 
+        {
+            //copy 1 to 1 until we get to selectedPlaylist, then copy 1+1 to 1
+            if (i < selectedPlaylist) 
+            {
+                tempPlaylistArray[i] = playlistArray[i];
+            }
+            else if (i == selectedPlaylist)
+            {
+                //Do nothing, but I'm leaving this nested if to indicate we're deliberatelty doing nothing
+            }   
+            else if (i > selectedPlaylist)
+            {
+                tempPlaylistArray[i] = playlistArray[i+1];
+            }
+        }
+        playlistArray = tempPlaylistArray;
+        System.out.println("|> " + tempNameOfPlaylist + " deleted."); 
+        System.out.println("|");
+        System.out.print("|> ");  
     }
     
     //a method show help text
     private void deleteMovie()
     {
-        
+        System.out.println("|>> Select a Movie to delete it");
+        int selectedMovie = showNumberedMovies();                       //allows user to select movie
+        database.deleteMovie(selectedMovie);                            //deletes from database
+        for (int i = 0; i < logicalSize; i++)                           //for each playlist...
+        {
+            playlistArray[i].deleteMovie(selectedMovie);                //..also delete the movie.   
+        }
     }
     
     //a method show help text
     private void saveMovieDatabase()
     {
-        
+        //does a path exit?
+        if (databasePath.equals("")) 
+        {
+         //no path exists, please make one
+        System.out.println("|>> Saving a new database:");
+        System.out.println("|> No path is registered for this Database. Please enter a new path to save the current Movie Database.");
+        System.out.print("|>");
+        String answerPath = "";
+        answerPath = console.nextLine();
+        databasePath = answerPath;
+        //save to path
+        saveToPath(databasePath);
+        }
+
+        else
+        {
+            //save to path
+            saveToPath(databasePath);
+        }
     }
     
+    private void saveToPath(String path)
+    {
+        // -------- my implimentation of Lecture 11 --------
+        PrintWriter outputStream = null;
+        try
+        {
+            outputStream = new PrintWriter (path);
+            int numberOfMovies = database.getLogicalSize();
+            for (int i = 0; i < numberOfMovies; i++) 
+            {
+                outputStream.println("Movie title: "    + database.getMovie(i).getName());
+                outputStream.println("Director: "       + database.getMovie(i).getDirector());
+                outputStream.println("fileSize: "       + database.getMovie(i).getFileSize());
+                outputStream.println("duration: "       + database.getMovie(i).getDuration());
+                outputStream.println("");
+            }
+            outputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println ("|>> Error opening the file " + path);
+            System.out.println ("|> Returning to main menu ");
+            System.out.println("|");
+            System.out.print("|> ");  
+        }
+        // -----------------------------------------------
+    }
+
+    private void openFromPath(String path);
+    {
+
+        //success, save the path
+        databasePath = path;
+        // -------- my implimentation of Lecture 11 --------
+        Scanner inputStream = null;
+        System.out.println ("The file " + path +"\ncontains the following lines:\n");
+        try
+        {
+            inputStream = new Scanner (new File (path));
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println ("|>> Error opening the file " + path);
+            System.out.println ("|> Returning to main menu ");
+            System.out.println("|");
+            System.out.print("|> ");  
+        }
+        while (inputStream.hasNextLine ())
+        {
+            String line = inputStream.nextLine ();
+            System.out.println (line);
+        }
+        inputStream.close ();
+        // -----------------------------------------------
+    }
      //a method show help text
     private void openMovieDatabase()
     {
-        
+        //alert user this will override their current movieDatabase
+        System.out.println("|>> This will repalce any unsaved changes to the current Movie Database. Are you sure you'd like to continue?");
+        System.out.println("|> - 1 Yes");
+        System.out.println("|> - 2 No");
+        System.out.println("|");
+        System.out.print("|> ");  
+        int answer = console.nextInt();
+        switch (answer)
+        {
+            case 1: 
+            {
+                //openDatabase
+                System.out.println("|>> Opening a new database:");
+                System.out.println("|> Please enter a path of a new Movie Database to open.");
+                System.out.print("|>");
+                String answerPath = "";
+                answerPath = console.nextLine();
+                openFromPath(answerPath);
+            }
+            case 2: 
+            {
+                //break
+                break;
+            }
+            default:
+            {
+                //Not a command option
+            }
+        }
     }
     
      //a method show help text
     private void listMoviesUnderSpecificRuntime()
     {
-        
+        float tempRuntime,stringToPrint;
+        //enter Director    
+        System.out.println("|>> Enter Runtime in Minutes (float)");
+        System.out.println("|");
+        System.out.print("|> ");    
+        tempRuntime = console.nextFloat();
+       
+
+        stringToPrint = database.getMovieByRuntime(tempRuntime);
+        System.out.println(stringToPrint); 
+        System.out.println("| "); 
+        System.out.print("|> "); 
     }
     
      //a method show help text
     private void editMovie()
     {
-        
+        System.out.println("|>> Select a Movie to edit it");
+         int selectedMovie;// = showNumberedMovies();
+
+        //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
+        //System.out.println("|>> To add a movie, simply type in their number. When you are done, type in -1");
+        do
+        {
+            selectedMovie = showNumberedMovies();
+            if(selectedMovie==-1)
+            {
+                break;
+            }
+            do
+            {
+                int tempMovie = database.getMovie(selectedMovie);
+                int editMovieOptions = editMovieMenu();
+                switch(editMovieOptions)
+                {
+                    case 1:
+                    {
+                        String tempName = "";
+                        System.out.println("|>> Enter a new Name:");
+                        System.out.print("|> ");
+                        tempName = console.nextLine();
+                        tempMovie.setName(tempName);
+                        database.setMovie(selectedMovie,tempMovie);
+                    }
+                    case 2:
+                    {
+                        String tempDirector = "";
+                        System.out.println("|>> Enter a new Director:");
+                        System.out.print("|> ");
+                        tempDirector = console.nextLine();
+                        tempMovie.setDirector(tempDirector);
+                        database.setMovie(selectedMovie,tempMovie);
+                    }
+                    case 3:
+                    {
+                        int tempFileSize = -1;
+                        System.out.println("|>> Enter a new FileSize:");
+                        System.out.print("|> ");
+                        tempFileSize = console.nextInt();
+                        tempMovie.setDirector(tempFileSize);
+                        database.setMovie(selectedMovie,tempMovie);
+                    }
+                    case 4:
+                    {
+                        float tempDuration = -1;
+                        System.out.println("|>> Enter a new Duration:");
+                        System.out.print("|> ");
+                        tempDuration = console.nextFloat();
+                        tempMovie.setDirector(tempDuration);
+                        database.setMovie(selectedMovie,tempMovie);
+                    }
+                    case 5:
+
+                    default:
+                }
+            }while(editMovieOptions!=5 && editMovieOptions!=-1);
+            //playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(intAnswer));
+        }while(intAnswer!=-1);
+
+
+        System.out.println("|");
+        System.out.print("|> ");
+    }
+
+    private int editMovieMenu()
+    {
+        System.out.println("|>> Edit Movie Menu");
+        System.out.println("|");        
+        System.out.println("|> 1 - Edit Name");
+        System.out.println("|> 2 - Edit Director");
+        System.out.println("|> 3 - Edit FileSize");
+        System.out.println("|> 4 - Edit Duration");
+        System.out.println("|> 5 - Exit Menu");
+        System.out.println("|");
+        System.out.print("|> ");
+        int answer = -1;
+        answer = console.nextInt();
+        return(answer);
     }
     
     private int showNumberedPlaylists()
@@ -371,7 +668,8 @@ public class Interface {
         System.out.println("| ");
         System.out.println("|> Please choose a playlist");
         System.out.print("|> ");
-        intAnswer = console.nextInt();
+        while(sanatiseNextInt(intAnswer));
+        //intAnswer = console.nextInt();
         return(intAnswer);
     }
     
@@ -400,20 +698,40 @@ public class Interface {
         System.out.println("| ");
         System.out.println("|> Please choose a movie");
         System.out.print("|> ");
-        intAnswer = console.nextInt();
+        while(sanatiseNextInt(intAnswer));//intAnswer = console.nextInt();
         return(intAnswer);
     }
-    for (int i = 0; i < database.getLogicalSize(); i++) 
-        {
-            System.out.println("|> " + database.getMovie(i).getName());
-        }
+
 
      //a method show help text
     private void editPlaylist()
     {
-        
+        //select a playlist
+           
 
-        //ask user if they'd like to stop
+         System.out.println("|>> Select a Playlist to edit it");
+         int selectedPlaylist = showNumberedPlaylists();
+         //tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
+        
+        //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
+        System.out.println("|>> To add a movie, simply type in their number. When you are done, type in -1");
+        do
+        {
+            intAnswer = showNumberedMovies();
+            if(intAnswer==-1)
+            {
+                break;
+            }
+            if(playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(intAnswer)) == false)
+            {
+                //an error has occured! Notify user.
+                System.out.println("|> Playlist full! Please delete movies from this playlist if you'd like to add more. ");
+                System.out.println("|");
+                System.out.print("|> ");
+
+            }
+        }while(intAnswer!=-1);
+
 
         System.out.println("|");
         System.out.print("|> ");

@@ -28,7 +28,7 @@ public class Movie
         duration = 0;
     }
 
-    public Movie(String tempName, String tempDirector, int tempFileSize float tempDuration)
+    public Movie(String tempName, String tempDirector, int tempFileSize, float tempDuration)
     { 
         // initialise instance variables
         name = tempName;

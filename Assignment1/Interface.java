@@ -122,7 +122,6 @@ public class Interface {
             try{
                 convertedAnswer = Float.parseFloat(answer);
                 error = false;
-                return(convertedAnswer);
             }catch(NumberFormatException ex)
             {
                 //Error: Not correct format
@@ -208,7 +207,7 @@ public class Interface {
                             System.out.println("|>> Not a recognised command. Please enter again");
                             System.out.println("|");
                             System.out.print("|> ");
-                            error = true;
+                            //error = true;
                     }
         //}while (error == true);
     }
@@ -372,7 +371,7 @@ public class Interface {
         System.out.print("|> ");    
         tempDirector = console.nextLine();
 
-        stringToPrint = database.getMovieByDirector(director)
+        stringToPrint = database.getMovieByDirector(tempDirector);
         System.out.println(stringToPrint); 
         System.out.println("| "); 
         System.out.print("|> "); 
@@ -396,7 +395,7 @@ public class Interface {
     {
         System.out.println("|>> Select a Playlist to delete it");
         int selectedPlaylist = showNumberedPlaylists();
-        int tempNameOfPlaylist = playlistArray[selectedPlaylist].getPlaylistName();
+        String tempNameOfPlaylist = playlistArray[selectedPlaylist].getPlaylistName();
         Playlist tempPlaylistArray[] = new Playlist[logicalSize-1];
         for (int i = 0; i< tempPlaylistArray.length; i++) 
         {
@@ -446,30 +445,30 @@ public class Interface {
         answerPath = console.nextLine();
         databasePath = answerPath;
         //save to path
-        savetoPath(databasePath);
+        saveToPath(databasePath);
         }
 
         else
         {
             //save to path
-            savetoPath(databasePath);
+            saveToPath(databasePath);
         }
     }
     
-    private void saveToPath(String path);
+    private void saveToPath(String path)
     {
         // -------- my implimentation of Lecture 11 --------
         PrintWriter outputStream = null;
         try
         {
             outputStream = new PrintWriter (path);
-            int numberOfMovies = movieDatabase.getLogicalSize();
+            int numberOfMovies = database.getLogicalSize();
             for (int i = 0; i < numberOfMovies; i++) 
             {
-                outputStream.println("Movie title: "    + movieDatabase.getMovie(i).getName());
-                outputStream.println("Director: "       + movieDatabase.getMovie(i).getDirector());
-                outputStream.println("fileSize: "       + movieDatabase.getMovie(i).getFileSize());
-                outputStream.println("duration: "       + movieDatabase.getMovie(i).getDuration());
+                outputStream.println("Movie title: "    + database.getMovie(i).getName());
+                outputStream.println("Director: "       + database.getMovie(i).getDirector());
+                outputStream.println("fileSize: "       + database.getMovie(i).getFileSize());
+                outputStream.println("duration: "       + database.getMovie(i).getDuration());
                 outputStream.println("");
             }
             outputStream.close();
@@ -484,7 +483,7 @@ public class Interface {
         // -----------------------------------------------
     }
 
-    private void openFromPath(String path);
+    private void openFromPath(String path)
     {
 
         //success, save the path
