@@ -44,7 +44,7 @@ public class Playlist extends MovieDatabase
     }
     else
     {
-        if (getMovieNumber(tempName) == -1) //time to check if we have a duplicate movie by name: (Note: An assumption is made that all other meta data could theoretically be the same as a different, unique movie. We also butcher our "getMovieNumber()" method to check)
+        if (getMovieNumber(newMovie.getName()) == -1) //time to check if we have a duplicate movie by name: (Note: An assumption is made that all other meta data could theoretically be the same as a different, unique movie. We also butcher our "getMovieNumber()" method to check)
         {
             addMovie(newMovie);//setMovie(logicalSize,newMovie);  //inherited from MovieDatabase
             updatePlaylist();     //update playlist stats
@@ -54,7 +54,6 @@ public class Playlist extends MovieDatabase
         {
            System.out.println("|>> Movie already exists in Playlist!"); 
            System.out.println("|");
-           System.out.print("|>");
            return(false);
         }
         

@@ -40,14 +40,14 @@ public class MovieDatabase
     private void chrisCopy2implimentation(Movie array1[], Movie array2[], Movie newMovie)
     {
       //Movie[] returnArray = new Movie[array1.length+1];
-      debugPrint("Array1Length: " + Integer.toString(array1.length));
+      //debugPrint("Array1Length: " + Integer.toString(array1.length));
       for(int i=0; i< array1.length; i++)
       {
         array2[i] = array1[i];
-        debugPrint("Loop count: " + Integer.toString(i) + " Name:" + array2[i].getName()+ " Name2:" + array1[i].getName());
+        //debugPrint("Loop count: " + Integer.toString(i) + " Name:" + array2[i].getName()+ " Name2:" + array1[i].getName());
       }
       array2[array1.length] = newMovie;
-      debugPrint("Loop count END Name:" + array2[array1.length].getName());
+      //debugPrint("Loop count END Name:" + array2[array1.length].getName());
     }
 
     //Methods for getting/setting our private movies in the MovieDatabase
@@ -56,12 +56,9 @@ public class MovieDatabase
    {
       //adds to array
       Movie tempMovies[] = new Movie[logicalSize+1];
-      //tempMovies = chrisCopy2implimentation(movieArray,newMovie);
       chrisCopy2implimentation(movieArray,tempMovies,newMovie);
       movieArray = tempMovies;
-      //movieArray = tempMovies;
-      String tempstring = movieArray[logicalSize].getName();
-      String tempstring2 = tempMovies[logicalSize].getName();
+      System.out.println("|> " + newMovie.getName() + " added!");
       logicalSize++;
     }   
     
@@ -140,10 +137,10 @@ public class MovieDatabase
    
   public String getMoviesAsString()
   {
-      String stringToPrint = "";
+      String stringToPrint = "|\n";
       for (int i = 0; i < logicalSize; i++) 
       {
-        stringToPrint += movieArray[i].getName() + "\n";
+        stringToPrint += "|> " + movieArray[i].getName() + "\n";
       }
       
       return stringToPrint;
