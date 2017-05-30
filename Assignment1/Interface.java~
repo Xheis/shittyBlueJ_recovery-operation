@@ -90,16 +90,18 @@ public class Interface {
         System.out.println("|> 15 - Edit Playlist");
         System.out.println("|> 16 - Exit");
         System.out.print("|> ");
+        console.nextLine(); //consumes any left offer buffer
     }
 
-    private boolean sanatiseNextInt(int convertedAnswer)
+    
+    private boolean sanatiseNextInt(int [] convertedAnswer)    //what a beautiful pass-by-reference function which won't work in Java. Welcome to the single element array.
     {
         String answer = console.nextLine();
         boolean error = false;
 
             //santise
             try{
-                convertedAnswer = Integer.parseInt(answer);
+                convertedAnswer[0] = Integer.parseInt(answer);
                 error = false;
                 
             }catch(NumberFormatException ex)
@@ -114,14 +116,14 @@ public class Interface {
             return(error);
     }
 
-    private boolean sanatiseNextFloat(float convertedAnswer)
+    private boolean sanatiseNextFloat(float [] convertedAnswer)
     {
         String answer = console.nextLine();
         boolean error = false;
 
             //santise
             try{
-                convertedAnswer = Float.parseFloat(answer);
+                convertedAnswer[0] = Float.parseFloat(answer);
                 error = false;
             }catch(NumberFormatException ex)
             {
@@ -140,7 +142,7 @@ public class Interface {
     {
         //Take user input by looping through the uglest nested if-else tree you can imagine. I wanted to do the program like this, but I didn't work out how to make a proper command line parser. 
                     //String answer;          //Answer as a string
-                    int menuOption = 0;//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
+                    int menuOption[] = {0};//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
                     //boolean error;  //answer error flag
                     //error = false;
 
@@ -168,7 +170,7 @@ public class Interface {
                         continue; //skips this do loop operation
                     } */
 
-                    switch(menuOption)
+                    switch(menuOption[0])
                     {
                         case 1: help();break; 
 
@@ -226,8 +228,8 @@ public class Interface {
     {
         //variables we'll fill, and use to create a new instance of a movie
         String tempName,tempDirector;
-        int tempFileSize = 0;
-        float tempDuration;
+        int tempFileSize[] = {0};
+        float tempDuration[] = {0};
 
         //set up a temp. movie variable, for us to pass to the database to store.
         Movie tempMovie;
@@ -262,8 +264,8 @@ public class Interface {
 
         tempMovie.setName(tempName);
         tempMovie.setDirector(tempDirector);
-        tempMovie.setFileSize(tempFileSize);
-        tempMovie.setDuration(tempDuration);
+        tempMovie.setFileSize(tempFileSize[0]);
+        tempMovie.setDuration(tempDuration[0]);
 
         if (database.getMovieNumber(tempName) == -1) //time to check if we have a duplicate movie by name: (Note: An assumption is made that all other meta data could theoretically be the same as a different, unique movie. We also butcher our "getMovieNumber()" method to check)
         {
@@ -274,14 +276,6 @@ public class Interface {
             System.out.println("|> Duration: " + tempMovie.getDuration());
         database.addMovie(tempMovie);
         Movie.numberOfMovies++; //static as requested.
-
-        //null everything, I think we could have a unforseen issues otherwise.
-        tempName = "";
-        tempDirector = "";
-        tempFileSize = -2;
-        tempDuration = -2;
-        tempMovie = new Movie();
-
 
         System.out.println("|");
         System.out.print("|>");
@@ -548,7 +542,7 @@ public class Interface {
      //a method show help text
     private void listMoviesUnderSpecificRuntime()
     {
-        float tempRuntime = 0;
+        float tempRuntime[] = {0};
         String stringToPrint ="";
         //enter Director    
         System.out.println("|>> Enter Runtime in Minutes (float)");
@@ -557,7 +551,7 @@ public class Interface {
         
         while (sanatiseNextFloat(tempRuntime));   //will repeat input until a valid input is taken
 
-        stringToPrint = database.getMovieByRuntime(tempRuntime);
+        stringToPrint = database.getMovieByRuntime(tempRuntime[0]);
         System.out.println(stringToPrint); 
         System.out.println("| "); 
         System.out.print("|> "); 
@@ -651,7 +645,7 @@ public class Interface {
     
     private int showNumberedPlaylists()
     {
-        int intAnswer = -1;
+        int intAnswer[] = {-1};
         System.out.println("|>> Showing all Playlists");
         System.out.println("|");
         //loop all playlists, show them numbered;
@@ -672,7 +666,7 @@ public class Interface {
         System.out.print("|> ");
         while(sanatiseNextInt(intAnswer));
         //intAnswer = console.nextInt();
-        return(intAnswer);
+        return(intAnswer[0]);
     }
     
     private int showNumberedMovies()
@@ -701,7 +695,7 @@ public class Interface {
         System.out.println("|> Please choose a movie");
         System.out.print("|> ");
         while(sanatiseNextInt(intAnswer));//intAnswer = console.nextInt();
-        return(intAnswer);
+        return(intAnswer[0]);
     }
 
 
